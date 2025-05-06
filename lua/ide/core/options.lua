@@ -1,3 +1,9 @@
+local opt = vim.opt
+local o = vim.o
+local g = vim.g
+
+-------------------------------------- options ------------------------------------------
+
 -- disable netrw
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
