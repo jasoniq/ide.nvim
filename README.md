@@ -36,6 +36,16 @@ cost of reducing the size of the editor window, which should be the primary focu
 With this in mind, this project aims to provide as much useful information around the editor and within the editor, while
 minimizing clutter and proactively removing or closing various panes to optimize the coding editor experience.
 
+### Core plugins
+
+ - Lua support functions
+    - [Plenary](https://github.com/nvim-lua/plenary.nvim)
+
+### UI & Theme
+
+ - Colorscheme
+    - [Catppuccin](https://github.com/catppuccin/nvim)
+
 ### Editor plugins
 
  - Syntax highliting
@@ -60,7 +70,6 @@ minimizing clutter and proactively removing or closing various panes to optimize
 
 ## Nice to haves
 
- - Colorscheme (catppuccin)
  - Visual file tree (nvim-tree)
  - Buffer & status enchancements (Bufferline & lualine)
 
