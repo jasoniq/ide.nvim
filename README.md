@@ -40,11 +40,15 @@ minimizing clutter and proactively removing or closing various panes to optimize
 
  - Lua support functions
     - [Plenary](https://github.com/nvim-lua/plenary.nvim)
+ - Easy TMUX navigation
+    - [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 
 ### UI & Theme
 
  - Colorscheme
     - [Catppuccin](https://github.com/catppuccin/nvim)
+ - UI - Dashboard, popups, animations, etc...
+    - [Folke Snacks](https://github.com/folke/snacks.nvim)
 
 ### Editor plugins
 
