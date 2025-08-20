@@ -4,13 +4,35 @@ A collection of neovim plugins which provide IDE functionality based on my perso
 
 ## Installation
 
-This plugin is built to be loaded by Lazy but should work in other plugin managers.
+This plugin is built to be loaded by LazyVim but should work in other plugin managers.
 
  1. Set your prefered `<leader>` prefix
  2. Add `lazy.nvim` package manager
- 2. Create plugin file: `lua/plugins/ide.lua`
+ 3. Create plugin file: `lua/plugins/ide.lua`
 
 ## [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+## Configuring Treesitter Language Parsers
+
+By default, this plugin does NOT install any Treesitter language parsers. This keeps your setup minimal and fast.
+
+To add support for your preferred languages, update your Treesitter config as follows:
+
+```lua
+{
+  "nvim-treesitter/nvim-treesitter",
+  opts = {
+    ensure_installed = {
+      "lua", "python", "javascript", -- add your languages here
+    },
+  },
+}
+```
+
+After updating your config, run `:TSUpdate` in Neovim to install the parsers.
+
+**Tip:** Only add languages you actually use to keep your setup lean!
+
 
 ```lua
 {
@@ -19,6 +41,32 @@ This plugin is built to be loaded by Lazy but should work in other plugin manage
     config = function()
         require("ide.core")
     end
+}
+```
+
+ 4. Update `nvim-treesitter` config to ensure your desired languages are install
+
+```lua
+{
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+        ensure_installed = {
+            "bash",
+            "html",
+            "javascript",
+            "json",
+            "lua",
+            "markdown",
+            "markdown_inline",
+            "python",
+            "query",
+            "regex",
+            "tsx",
+            "typescript",
+            "vim",
+            "yaml",
+        },
+    },
 }
 ```
 
@@ -36,17 +84,22 @@ cost of reducing the size of the editor window, which should be the primary focu
 With this in mind, this project aims to provide as much useful information around the editor and within the editor, while
 minimizing clutter and proactively removing or closing various panes to optimize the coding editor experience.
 
-### Core plugins
+### Core
 
  - Lua support functions
     - [Plenary](https://github.com/nvim-lua/plenary.nvim)
  - Easy TMUX navigation
     - [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
+ - Folke Snacks
+    - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 
-### UI & Theme
+### Theme
 
  - Colorscheme
     - [Catppuccin](https://github.com/catppuccin/nvim)
+
+### UI & Theme
+
  - UI - Dashboard, popups, animations, etc...
     - [Folke Snacks](https://github.com/folke/snacks.nvim)
 
