@@ -1,16 +1,19 @@
 # ide.nvim
 
-A collection of neovim plugins which provide IDE functionality based on my personal preferences
+A modern, minimal IDE configuration for Neovim with carefully curated plugins and sensible defaults.
 
 ## Installation
 
-This plugin is built to be loaded by LazyVim but should work in other plugin managers.
+### Requirements
+- Neovim 0.9+
+- [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
+- LazyVim (recommended) or compatible configuration
 
- 1. Set your prefered `<leader>` prefix
- 2. Add `lazy.nvim` package manager
- 3. Create plugin file: `lua/plugins/ide.lua`
+### Setup
+1. Set your preferred `<leader>` prefix
+2. Add to your LazyVim plugins directory: `lua/plugins/ide.lua`
 
-## [lazy.nvim](https://github.com/folke/lazy.nvim)
+### Full Configuration Example
 
 ```lua
 {
@@ -53,7 +56,7 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
 }
 ```
 
- 4. (Optional) For a minimal setup, you can use ide.nvim with default settings:
+### Minimal Setup
 
 ```lua
 {
@@ -68,30 +71,57 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
 ## Configuration Options
 
 ### Features
-Control which plugins are loaded:
+Control which optional plugins are loaded:
 - `telescope`: Fuzzy finder (default: true) 
 - `which_key`: Key binding helper (default: true)
 - `treesitter`: Syntax highlighting (default: true)
 
-Note: File explorer is provided by snacks and is always available via `<leader>e`.
+**Core components** (always included):
+- File explorer via snacks (`<leader>e`)
+- Dashboard with project shortcuts
+- Catppuccin colorscheme
 
 ### Plugin Configuration
-Each plugin can be customized via the `plugins` table. See individual plugin documentation for available options.
-
-### Treesitter Language Parsers
-By default, this plugin does NOT install any Treesitter language parsers to keep your setup minimal and fast. Add support for your preferred languages via the config:
+Each plugin can be customized via the `plugins` table:
 
 ```lua
 plugins = {
+    -- Colorscheme options
+    catppuccin = { flavour = "mocha" },
+    
+    -- Snacks UI components
+    snacks = { 
+        dashboard = { enabled = true, example = "advanced" },
+        explorer = { enabled = true }
+    },
+    
+    -- Language support (only installs what you specify)
     treesitter = {
         ensure_installed = { "lua", "python", "javascript" }
+    },
+    
+    -- Fuzzy finder customization
+    telescope = { 
+        defaults = { layout_strategy = "horizontal" }
     }
 }
 ```
 
-After updating your config, run `:TSUpdate` in Neovim to install the parsers.
+### Vim Options
+Customize editor behavior while preserving IDE essentials:
 
-**Tip:** Only add languages you actually use to keep your setup lean!
+```lua
+options = {
+    -- Indentation (default: 2 spaces)
+    shiftwidth = 4,
+    tabstop = 4,
+    
+    -- Interface preferences
+    number = true,
+    cursorline = true,
+    clipboard = "unnamedplus"
+}
+```
 
 ### Custom Keymaps
 Add your own keymaps in the format:
@@ -103,62 +133,48 @@ keymaps = {
 }
 ```
 
-## What makes a good IDE
+## IDE Philosophy
 
-**WARNING: Subjective opinion**
+**Editor-Centric Development Experience**
 
-Neovim is primarily a text editor, but an IDE is much more than just an editor.
+A truly productive IDE should maximize coding focus while minimizing visual noise. The editor window is your primary workspace—everything else should enhance this experience without competing for attention.
 
-A good developer experience should be centered around the editor window, with a little as possible clutter surrounding it.
-Modern IDE's tend to have many panels surrounding the editor window providing various bits of information and access to
-various features. While useful, much of it is not important to see at all times, and tends to clutter the space at the
-cost of reducing the size of the editor window, which should be the primary focus when coding.
+This project delivers essential IDE functionality through carefully curated, optional plugins that integrate seamlessly. Rather than overwhelming you with panels and widgets, it provides powerful tools that stay out of your way until needed.
 
-With this in mind, this project aims to provide as much useful information around the editor and within the editor, while
-minimizing clutter and proactively removing or closing various panes to optimize the coding editor experience.
+**Key Principles:**
+- **Minimal by default**: Only load what you actually use
+- **Configurable without complexity**: Sensible defaults, easy customization
+- **Integrated experience**: Cohesive tools that work together naturally
+- **Performance focused**: Fast startup, responsive editing
 
-### Core
+## What's Included
 
- - Lua support functions
-    - [Plenary](https://github.com/nvim-lua/plenary.nvim)
- - Easy TMUX navigation
-    - [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
- - Folke Snacks
-    - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
+### Core Foundation
+Essential utilities that form the IDE backbone:
+- **[Plenary](https://github.com/nvim-lua/plenary.nvim)** - Lua utility functions for plugin ecosystem
+- **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)** - Seamless navigation between vim splits and tmux panes
 
-### Theme
+### Integrated UI System
+**[Snacks.nvim](https://github.com/folke/snacks.nvim)** provides a cohesive modern interface:
+- **Dashboard** - Clean startup screen with project shortcuts
+- **File Explorer** - Modern picker-style file browsing (`<leader>e`)
+- **Utilities** - Consistent UI components and animations
 
- - Colorscheme
-    - [Catppuccin](https://github.com/catppuccin/nvim)
+### Smart Code Features
+**[Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** (optional)
+- Advanced syntax highlighting and code understanding
+- Language parsers installed on-demand to keep setup lean
 
-### UI & Theme
+**[Telescope](https://github.com/nvim-telescope/telescope.nvim)** (optional)
+- Fuzzy finding for files, symbols, and text across your project
+- Extensible picker interface for efficient navigation
 
- - UI - Dashboard, popups, animations, etc...
-    - [Folke Snacks](https://github.com/folke/snacks.nvim)
+**[Which-Key](https://github.com/folke/which-key.nvim)** (optional)
+- Interactive keymap help for discovering shortcuts
+- Self-documenting workflow
 
-### Editor plugins
-
- - Syntax highliting
-    - [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
- - Minimap & Scrolling
-    - [Minimap.vim](https://github.com/wfxr/minimap.vim)
-    - [neominimap.nvim](https://github.com/Isrothy/neominimap.nvim)
-    - [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)
- - Intellisense
-    - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-    - [mason](https://github.com/mason-org/mason.nvim)
-
-### Supporting add-ons
-
- - File navigation
-    - [telescope](https://github.com/nvim-telescope/telescope.nvim)
- 
- - linting (nvm-lint)
- - Refactoring (refactoring.nvim)
- - Debugging (dap)
- - Session management (auto-session)
-
-## Nice to haves
-
- - Buffer & status enchancements (Bufferline & lualine)
+### Visual Experience
+**[Catppuccin](https://github.com/catppuccin/nvim)** - Modern, easy-on-eyes colorscheme
+- Configurable flavors (mocha, macchiato, frappe, latte)
+- Consistent theming across the entire plugin ecosystem
 
