@@ -19,12 +19,21 @@ return {
     local user_config = config.plugins.which_key or {}
     
     local default_config = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      preset = "modern",
+      delay = 300,
     }
 
     local final_config = vim.tbl_deep_extend("force", default_config, user_config)
     which_key.setup(final_config)
+
+    -- Register group names for organized display
+    which_key.add({
+      { "<leader>f", group = "Find", icon = "🔍" },
+      { "<leader>g", group = "Git", icon = "🌿" },
+      { "<leader>b", group = "Buffer", icon = "📄" },
+      { "<leader>w", group = "Window", icon = "🪟" },
+      { "<leader>t", group = "Treesitter", icon = "🌳" },
+      { "<leader>c", group = "Code", icon = "💻" },
+    })
   end,
 }

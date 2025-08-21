@@ -123,12 +123,62 @@ options = {
 }
 ```
 
+### Default Keymaps
+
+The IDE includes comprehensive keymaps organized for which-key display:
+
+#### Core Navigation
+- `<leader>e` - File Explorer (snacks)
+- `<leader>d` - Dashboard
+- `<Esc>` - Clear search highlights
+- `<C-s>` - Save file
+
+#### Find & Search (`<leader>f`)
+- `<leader>ff` - Find Files
+- `<leader>fr` - Recent Files
+- `<leader>fg` - Git Files
+- `<leader>fw` - Find Word (live grep)
+- `<leader>fc` - Find Word under Cursor
+- `<leader>fb` - Find Buffers
+- `<leader>fh` - Find Help
+- `<leader>fk` - Find Keymaps
+
+#### Git (`<leader>g`)
+- `<leader>gc` - Git Commits
+- `<leader>gs` - Git Status
+- `<leader>gb` - Git Branches
+
+#### Buffer Management (`<leader>b`)
+- `<leader>bd` - Delete Buffer
+- `<leader>bn` - Next Buffer
+- `<leader>bp` - Previous Buffer
+- `<leader>ba` - Delete All Buffers
+
+#### Window Management (`<leader>w`)
+- `<leader>wv` - Vertical Split
+- `<leader>wh` - Horizontal Split
+- `<leader>wc` - Close Window
+- `<leader>wo` - Only Window
+- `<leader>w=` - Equalize Windows
+
+#### Code Actions
+- `gd` - Go to Definition (LSP)
+- `gr` - Go to References (LSP) 
+- `K` - Hover Documentation (LSP)
+- `<leader>ca` - Code Actions (LSP)
+- `<leader>rn` - Rename Symbol (LSP)
+
+#### Quick Actions
+- `<leader>q` - Quit
+- `<leader>w` - Save
+- `<leader>/` - Toggle Comment
+
 ### Custom Keymaps
-Add your own keymaps in the format:
+Add your own keymaps via configuration:
 ```lua
 keymaps = {
-    [mode] = {
-        ["<key>"] = { "<command>", { desc = "description" } }
+    n = {
+        ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
     }
 }
 ```

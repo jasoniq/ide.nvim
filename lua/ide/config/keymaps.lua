@@ -9,25 +9,75 @@ function M.setup(user_keymaps)
   map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
   map("n", "<C-s>", "<cmd>w<CR>", { desc = "general save file" })
   map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
-  map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+  map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative Numbers" })
 
   -- Comment (always enabled)
   map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
   map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
-  -- Feature-specific keymaps
-  -- File explorer (snacks) - always available since it's in core
-  map("n", "<leader>e", function() Snacks.explorer() end, { desc = "Explorer" })
+  -- File & Project Navigation (always available)
+  map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
+  map("n", "<leader>d", function() Snacks.dashboard() end, { desc = "Dashboard" })
 
+  -- Telescope - Find & Search
   if config.features.telescope then
-    map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-    map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+    -- Files
+    map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+    map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+    map("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = "Git Files" })
+    
+    -- Search
+    map("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find Word" })
+    map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find Word under Cursor" })
+    map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Find Help" })
+    map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Find Keymaps" })
+    map("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Find Marks" })
+    
+    -- Buffers & Tabs
+    map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find Buffers" })
+    map("n", "<leader>ft", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Find Text in Buffer" })
+    
+    -- Git integration
+    map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
+    map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
+    map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
   end
 
+  -- Treesitter - Code Navigation & Selection
+  if config.features.treesitter then
+    map("n", "<leader>ts", "<cmd>TSToggle highlight<cr>", { desc = "Toggle Syntax Highlighting" })
+    map("n", "<leader>tp", "<cmd>TSPlaygroundToggle<cr>", { desc = "Treesitter Playground" })
+  end
+
+  -- Buffer Management
+  map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
+  map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+  map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+  map("n", "<leader>ba", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete All Buffers" })
+
+  -- Window Management
+  map("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
+  map("n", "<leader>wh", "<cmd>split<cr>", { desc = "Horizontal Split" })
+  map("n", "<leader>wc", "<cmd>close<cr>", { desc = "Close Window" })
+  map("n", "<leader>wo", "<cmd>only<cr>", { desc = "Only Window" })
+  map("n", "<leader>w=", "<C-w>=", { desc = "Equalize Windows" })
+
+  -- Quick Actions
+  map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+  map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
+  map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+  map("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All" })
+
+  -- LSP-style mappings (if available)
+  map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
+  map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
+  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+
+  -- Which-key helper
   if config.features.which_key then
-    map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
+    map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Show All Keymaps" })
   end
 
   -- Apply user-defined keymaps
