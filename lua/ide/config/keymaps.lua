@@ -15,9 +15,17 @@ function M.setup(user_keymaps)
   map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
   map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
-  -- File & Project Navigation (always available)
+  -- Snacks - UI & Project Management (always available)
   map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
   map("n", "<leader>d", function() Snacks.dashboard() end, { desc = "Dashboard" })
+  
+  -- Snacks Picker - UI-focused operations  
+  map("n", "<leader>sr", function() Snacks.picker.recent() end, { desc = "Recent Files (Snacks)" })
+  map("n", "<leader>sp", function() Snacks.picker.projects() end, { desc = "Projects" })
+  map("n", "<leader>sc", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
+  map("n", "<leader>sn", function() Snacks.picker.notifications() end, { desc = "Notifications" })
+  map("n", "<leader>si", function() Snacks.picker.icons() end, { desc = "Icons" })
+  map("n", "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
 
   -- Telescope - Find & Search
   if config.features.telescope then

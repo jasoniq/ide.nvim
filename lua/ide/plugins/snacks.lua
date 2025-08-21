@@ -12,6 +12,7 @@ return {
       bigfile = { enabled = true },
       dashboard = { enabled = true, example = "advanced" },
       explorer = { enabled = true },
+      picker = { enabled = true },
     }
 
     local final_config = vim.tbl_deep_extend("force", default_config, user_config)

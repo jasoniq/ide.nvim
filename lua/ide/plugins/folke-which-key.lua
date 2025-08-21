@@ -28,8 +28,9 @@ return {
 
     -- Register group names for organized display
     which_key.add({
-      { "<leader>f", group = "Find", icon = "🔍" },
-      { "<leader>g", group = "Git", icon = "🌿" },
+      { "<leader>f", group = "Find (Telescope)", icon = "🔍" },
+      { "<leader>g", group = "Git (Telescope)", icon = "🌿" },
+      { "<leader>s", group = "Snacks", icon = "🍿" },
       { "<leader>b", group = "Buffer", icon = "📄" },
       { "<leader>w", group = "Window", icon = "🪟" },
       { "<leader>t", group = "Treesitter", icon = "🌳" },

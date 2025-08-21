@@ -125,15 +125,23 @@ options = {
 
 ### Default Keymaps
 
-The IDE includes comprehensive keymaps organized for which-key display:
+The IDE uses a **hybrid approach** combining the best of both worlds:
 
 #### Core Navigation
 - `<leader>e` - File Explorer (snacks)
-- `<leader>d` - Dashboard
+- `<leader>d` - Dashboard (snacks)
 - `<Esc>` - Clear search highlights
 - `<C-s>` - Save file
 
-#### Find & Search (`<leader>f`)
+#### 🍿 Snacks - UI & Project Management (`<leader>s`)
+- `<leader>sr` - Recent Files
+- `<leader>sp` - Projects
+- `<leader>sc` - Colorschemes
+- `<leader>sn` - Notifications
+- `<leader>si` - Icons
+- `<leader>sa` - Autocmds
+
+#### 🔍 Telescope - Find & Search (`<leader>f`)
 - `<leader>ff` - Find Files
 - `<leader>fr` - Recent Files
 - `<leader>fg` - Git Files
@@ -143,7 +151,7 @@ The IDE includes comprehensive keymaps organized for which-key display:
 - `<leader>fh` - Find Help
 - `<leader>fk` - Find Keymaps
 
-#### Git (`<leader>g`)
+#### 🌿 Git via Telescope (`<leader>g`)
 - `<leader>gc` - Git Commits
 - `<leader>gs` - Git Status
 - `<leader>gb` - Git Branches
@@ -205,10 +213,11 @@ Essential utilities that form the IDE backbone:
 - **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)** - Seamless navigation between vim splits and tmux panes
 
 ### Integrated UI System
-**[Snacks.nvim](https://github.com/folke/snacks.nvim)** provides a cohesive modern interface:
-- **Dashboard** - Clean startup screen with project shortcuts
+**[Snacks.nvim](https://github.com/folke/snacks.nvim)** provides UI and project management:
+- **Dashboard** - Clean startup screen with project shortcuts (`<leader>d`)
 - **File Explorer** - Modern picker-style file browsing (`<leader>e`)
-- **Utilities** - Consistent UI components and animations
+- **Project Picker** - Quick project switching (`<leader>sp`)
+- **Utilities** - Notifications, colorschemes, icons (`<leader>s*`)
 
 ### Smart Code Features
 **[Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** (optional)
@@ -216,8 +225,9 @@ Essential utilities that form the IDE backbone:
 - Language parsers installed on-demand to keep setup lean
 
 **[Telescope](https://github.com/nvim-telescope/telescope.nvim)** (optional)
-- Fuzzy finding for files, symbols, and text across your project
-- Extensible picker interface for efficient navigation
+- Battle-tested search and navigation (`<leader>f*`)
+- LSP integration, git operations, buffer management
+- Mature ecosystem with extensive customization options
 
 **[Which-Key](https://github.com/folke/which-key.nvim)** (optional)
 - Interactive keymap help for discovering shortcuts
