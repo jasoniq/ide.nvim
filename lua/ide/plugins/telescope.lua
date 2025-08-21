@@ -1,3 +1,10 @@
+local config = require("ide.config")
+
+-- Only return the plugin if telescope feature is enabled
+if not config.features.telescope then
+  return {}
+end
+
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
@@ -10,7 +17,10 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
 
-    telescope.setup({
+    -- Get user configuration for telescope
+    local user_config = config.plugins.telescope or {}
+    
+    local default_config = {
       defaults = {
         path_display = { "smart" },
         mappings = {
@@ -21,16 +31,11 @@ return {
           },
         },
       },
-    })
+    }
+
+    local final_config = vim.tbl_deep_extend("force", default_config, user_config)
+    telescope.setup(final_config)
 
     telescope.load_extension("fzf")
-
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-    keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
   end,
 }

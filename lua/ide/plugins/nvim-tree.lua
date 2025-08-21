@@ -1,3 +1,10 @@
+local config = require("ide.config")
+
+-- Only return the plugin if nvim_tree feature is enabled
+if not config.features.nvim_tree then
+  return {}
+end
+
 return {
   -- and a directory file explorer that is easy to use
   "nvim-tree/nvim-tree.lua",
@@ -14,7 +21,10 @@ return {
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
-    nvimtree.setup({
+    -- Get user configuration for nvim-tree
+    local user_config = config.plugins.nvim_tree or {}
+    
+    local default_config = {
       view = {
         width = 35,
         relativenumber = true,
@@ -27,8 +37,8 @@ return {
         icons = {
           glyphs = {
             folder = {
-              arrow_closed = "", -- arrow when folder is closed
-              arrow_open = "", -- arrow when folder is open
+              arrow_closed = "", -- arrow when folder is closed
+              arrow_open = "", -- arrow when folder is open
             },
           },
         },
@@ -46,12 +56,9 @@ return {
       git = {
         ignore = false,
       },
-    })
+    }
 
-    -- set keymaps
-    local keymap = vim.keymap -- for conciseness
-
-    keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-    keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+    local final_config = vim.tbl_deep_extend("force", default_config, user_config)
+    nvimtree.setup(final_config)
   end
 }

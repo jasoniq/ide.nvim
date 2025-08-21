@@ -2,7 +2,7 @@ vim.uv = vim.uv or vim.loop
 
 local M = {}
 
----@param opts? JasoniqConfig
+---@param opts? IDEConfig
 function M.setup(opts)
   require("ide.config").setup(opts)
 end

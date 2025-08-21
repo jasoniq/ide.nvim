@@ -12,20 +12,77 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
 
 ## [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-## Configuring Treesitter Language Parsers
+```lua
+{
+    "jasoniq/ide.nvim",
+    import = "ide.plugins",
+    config = function()
+        require("ide.config").setup({
+            -- Optional: Customize which features to enable/disable
+            features = {
+                nvim_tree = true,     -- File explorer
+                telescope = true,     -- Fuzzy finder
+                which_key = true,     -- Key binding helper
+                treesitter = true,    -- Syntax highlighting
+            },
+            -- Optional: Change colorscheme (default: "catppuccin")
+            colorscheme = "catppuccin",
+            -- Optional: Plugin-specific configurations
+            plugins = {
+                catppuccin = { flavour = "mocha" },
+                nvim_tree = { view = { width = 30 } },
+                telescope = { 
+                    defaults = { 
+                        layout_strategy = "horizontal" 
+                    }
+                },
+                treesitter = {
+                    ensure_installed = { "lua", "python", "javascript" }
+                }
+            },
+            -- Optional: Custom keymaps
+            keymaps = {
+                n = {
+                    ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
+                }
+            }
+        })
+    end
+}
+```
 
-By default, this plugin does NOT install any Treesitter language parsers. This keeps your setup minimal and fast.
-
-To add support for your preferred languages, update your Treesitter config as follows:
+ 4. (Optional) For a minimal setup, you can use ide.nvim with default settings:
 
 ```lua
 {
-  "nvim-treesitter/nvim-treesitter",
-  opts = {
-    ensure_installed = {
-      "lua", "python", "javascript", -- add your languages here
-    },
-  },
+    "jasoniq/ide.nvim",
+    import = "ide.plugins",
+    config = function()
+        require("ide.config").setup()  -- Uses all defaults
+    end
+}
+```
+
+## Configuration Options
+
+### Features
+Control which plugins are loaded:
+- `nvim_tree`: File explorer (default: true)
+- `telescope`: Fuzzy finder (default: true) 
+- `which_key`: Key binding helper (default: true)
+- `treesitter`: Syntax highlighting (default: true)
+
+### Plugin Configuration
+Each plugin can be customized via the `plugins` table. See individual plugin documentation for available options.
+
+### Treesitter Language Parsers
+By default, this plugin does NOT install any Treesitter language parsers to keep your setup minimal and fast. Add support for your preferred languages via the config:
+
+```lua
+plugins = {
+    treesitter = {
+        ensure_installed = { "lua", "python", "javascript" }
+    }
 }
 ```
 
@@ -33,40 +90,13 @@ After updating your config, run `:TSUpdate` in Neovim to install the parsers.
 
 **Tip:** Only add languages you actually use to keep your setup lean!
 
-
+### Custom Keymaps
+Add your own keymaps in the format:
 ```lua
-{
-    "jasoniq/ide.nvim"
-    import = "ide.plugins"
-    config = function()
-        require("ide.core")
-    end
-}
-```
-
- 4. Update `nvim-treesitter` config to ensure your desired languages are install
-
-```lua
-{
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-        ensure_installed = {
-            "bash",
-            "html",
-            "javascript",
-            "json",
-            "lua",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "query",
-            "regex",
-            "tsx",
-            "typescript",
-            "vim",
-            "yaml",
-        },
-    },
+keymaps = {
+    [mode] = {
+        ["<key>"] = { "<command>", { desc = "description" } }
+    }
 }
 ```
 

@@ -1,3 +1,10 @@
+local config = require("ide.config")
+
+-- Only return the plugin if treesitter feature is enabled
+if not config.features.treesitter then
+  return {}
+end
+
 -- NOTE:
 -- No Treesitter language parsers are installed by default.
 -- This keeps your Neovim setup minimal and fast.
@@ -17,8 +24,11 @@ return {
     -- import nvim-treesitter plugin
     local treesitter = require("nvim-treesitter.configs")
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
+    -- Get user configuration for treesitter
+    local user_config = config.plugins.treesitter or {}
+    
+    local default_config = {
+      -- enable syntax highlighting
       highlight = {
         enable = true,
       },
@@ -41,6 +51,9 @@ return {
           node_decremental = "<bs>",
         },
       },
-    })
+    }
+
+    local final_config = vim.tbl_deep_extend("force", default_config, user_config)
+    treesitter.setup(final_config)
   end,
 }
