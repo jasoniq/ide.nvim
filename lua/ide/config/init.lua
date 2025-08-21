@@ -1,5 +1,4 @@
 ---@class IDEFeatures
----@field nvim_tree? boolean
 ---@field telescope? boolean
 ---@field which_key? boolean
 ---@field treesitter? boolean
@@ -39,7 +38,6 @@ local defaults = {
   keymaps = {},
   plugins = {},
   features = {
-    nvim_tree = true,
     telescope = true,
     which_key = true,
     treesitter = true,

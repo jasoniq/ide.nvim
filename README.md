@@ -20,7 +20,6 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
         require("ide.config").setup({
             -- Optional: Customize which features to enable/disable
             features = {
-                nvim_tree = true,     -- File explorer
                 telescope = true,     -- Fuzzy finder
                 which_key = true,     -- Key binding helper
                 treesitter = true,    -- Syntax highlighting
@@ -30,7 +29,10 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
             -- Optional: Plugin-specific configurations
             plugins = {
                 catppuccin = { flavour = "mocha" },
-                nvim_tree = { view = { width = 30 } },
+                snacks = { 
+                    explorer = { enabled = true },
+                    dashboard = { enabled = true, example = "advanced" }
+                },
                 telescope = { 
                     defaults = { 
                         layout_strategy = "horizontal" 
@@ -67,10 +69,11 @@ This plugin is built to be loaded by LazyVim but should work in other plugin man
 
 ### Features
 Control which plugins are loaded:
-- `nvim_tree`: File explorer (default: true)
 - `telescope`: Fuzzy finder (default: true) 
 - `which_key`: Key binding helper (default: true)
 - `treesitter`: Syntax highlighting (default: true)
+
+Note: File explorer is provided by snacks and is always available via `<leader>e`.
 
 ### Plugin Configuration
 Each plugin can be customized via the `plugins` table. See individual plugin documentation for available options.
@@ -157,6 +160,5 @@ minimizing clutter and proactively removing or closing various panes to optimize
 
 ## Nice to haves
 
- - Visual file tree (nvim-tree)
  - Buffer & status enchancements (Bufferline & lualine)
 

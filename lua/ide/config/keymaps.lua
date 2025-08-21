@@ -16,10 +16,8 @@ function M.setup(user_keymaps)
   map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
   -- Feature-specific keymaps
-  if config.features.nvim_tree then
-    map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-    map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
-  end
+  -- File explorer (snacks) - always available since it's in core
+  map("n", "<leader>e", function() Snacks.explorer() end, { desc = "Explorer" })
 
   if config.features.telescope then
     map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })

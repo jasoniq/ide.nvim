@@ -40,17 +40,17 @@ The plugin uses a centralized config system in `lua/ide/config/init.lua`:
 
 ### Plugin Architecture
 Each file in `lua/ide/plugins/` returns a LazyVim plugin specification:
-- **core.lua**: Essential dependencies (plenary, vim-tmux-navigator, folke/snacks)
+- **core.lua**: Essential dependencies (plenary, vim-tmux-navigator)
+- **snacks.lua**: Folke snacks with explorer, dashboard, and utilities
 - **colorscheme.lua**: Catppuccin theme configuration
 - **treesitter.lua**: Syntax highlighting with minimal default parsers
-- **nvim-tree.lua**: File explorer
 - **telescope.lua**: Fuzzy finder
 - **folke-which-key.lua**: Key binding help
-- **folke-snacks.lua**: UI enhancements (dashboard, popups, animations)
 
 ### Default Configuration
 - **Indentation**: 2 spaces (expandtab enabled)
 - **Colorscheme**: Catppuccin (configurable)
+- **File Explorer**: Snacks explorer accessible via `<leader>e`
 - **Key mappings**: Defined in `config/keymaps.lua` with descriptive names
 - **Treesitter**: No language parsers installed by default (user must add via `ensure_installed`)
 
