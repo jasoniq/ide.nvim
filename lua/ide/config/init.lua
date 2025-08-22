@@ -1,48 +1,8 @@
----@class IDEFeatures
----@field telescope? boolean
----@field which_key? boolean
----@field treesitter? boolean
-
----@class IDEVimOptions
----@field expandtab? boolean
----@field shiftwidth? number
----@field tabstop? number
----@field softtabstop? number
----@field smartindent? boolean
----@field ignorecase? boolean
----@field smartcase? boolean
----@field cursorline? boolean
----@field cursorlineopt? string
----@field number? boolean
----@field numberwidth? number
----@field clipboard? string
----@field mouse? string
----@field timeoutlen? number
----@field fillchars? table
----@field whichwrap? string
-
----@class IDEConfig
----@field colorscheme? string|fun()
----@field options? IDEVimOptions
----@field keymaps? table
----@field plugins? table<string, table>
----@field features? IDEFeatures
+-- Import type definitions
+require("ide.config.core.types")
 
 local M = {}
-
----@type IDEConfig
-local defaults = {
-  ---@type string|fun()
-  colorscheme = "catppuccin",
-  options = {},
-  keymaps = {},
-  plugins = {},
-  features = {
-    telescope = true,
-    which_key = true,
-    treesitter = true,
-  },
-}
+local defaults = require("ide.config.core.defaults")
 
 ---@type IDEConfig
 local options
@@ -60,8 +20,8 @@ function M.setup(opts)
     vim.cmd.colorscheme(options.colorscheme)
   end
 
-  require("ide.config.options").setup(options.options or {})
-  require("ide.config.keymaps").setup(options.keymaps or {})
+  require("ide.config.core.options").setup(options.options or {})
+  require("ide.config.bindings.keymaps").setup(options.keymaps or {})
 end
 
 setmetatable(M, {
