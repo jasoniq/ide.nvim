@@ -78,8 +78,8 @@ Control which optional plugins are loaded:
 
 **Core components** (always included):
 - File explorer via snacks (`<leader>e`)
-- Dashboard with project shortcuts
-- Catppuccin colorscheme
+- Dashboard with project shortcuts (`<leader>d`)
+- Catppuccin colorscheme + live theme picker (`<leader>sc`)
 
 ### Plugin Configuration
 Each plugin can be customized via the `plugins` table:
@@ -135,8 +135,8 @@ The IDE uses a **hybrid approach** combining the best of both worlds:
 
 #### 🍿 Snacks - UI & Project Management (`<leader>s`)
 - `<leader>sr` - Recent Files
-- `<leader>sp` - Projects
-- `<leader>sc` - Colorschemes
+- `<leader>sp` - Projects  
+- `<leader>sc` - Colorscheme Picker (switch themes live)
 - `<leader>sn` - Notifications
 - `<leader>si` - Icons
 - `<leader>sa` - Autocmds
@@ -234,7 +234,9 @@ Essential utilities that form the IDE backbone:
 - Self-documenting workflow
 
 ### Visual Experience
-**[Catppuccin](https://github.com/catppuccin/nvim)** - Modern, easy-on-eyes colorscheme
-- Configurable flavors (mocha, macchiato, frappe, latte)
-- Consistent theming across the entire plugin ecosystem
+**Integrated Colorscheme Management**:
+- **Catppuccin** set as default theme (provided by snacks plugin)
+- **Live theme switching** via snacks picker (`<leader>sc`)
+- **Runtime discovery** - try different colorschemes without restart
+- **Consistent theming** across the entire plugin ecosystem
 

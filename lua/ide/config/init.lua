@@ -51,10 +51,13 @@ local options
 function M.setup(opts)
   options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
 
-  -- Colorscheme loading is handled by individual plugin files
-  -- Function-based colorschemes are called directly here
+  -- Colorscheme loading 
   if type(options.colorscheme) == "function" then
+    -- Custom colorscheme functions
     options.colorscheme()
+  elseif type(options.colorscheme) == "string" then
+    -- Set default colorscheme - users can switch via snacks picker (<leader>sc)
+    vim.cmd.colorscheme(options.colorscheme)
   end
 
   require("ide.config.options").setup(options.options or {})
