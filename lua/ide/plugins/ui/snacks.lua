@@ -23,6 +23,7 @@ return {
 				enabled = true,
 				configure = true, -- Auto-configure colorscheme integration
 			},
+			animate = { enabled = true }, -- Smooth animations with 45+ easing functions
 		}
 
 		local final_config = vim.tbl_deep_extend("force", default_config, user_config)

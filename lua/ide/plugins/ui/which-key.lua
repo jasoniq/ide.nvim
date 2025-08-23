@@ -74,10 +74,6 @@ return {
 
 			-- Buffer management enhancements
 			{ "<leader>bd", desc = "Delete Buffer (Smart)" },
-			{ "<leader>ba", desc = "Close Other Buffers" },
-			{ "<leader>bl", desc = "Close Buffers to Left" },
-			{ "<leader>br", desc = "Close Buffers to Right" },
-			{ "<leader>bo", desc = "Pick Buffer" },
 		})
 	end,
 }
