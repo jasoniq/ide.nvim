@@ -24,6 +24,16 @@ return {
 				configure = true, -- Auto-configure colorscheme integration
 			},
 			animate = { enabled = true }, -- Smooth animations with 45+ easing functions
+			
+			-- UI Focus Features
+			dim = { enabled = true }, -- Focus on active scope by dimming the rest
+			indent = { enabled = true }, -- Indent guides and scope visualization
+			zen = { enabled = true }, -- Distraction-free coding mode
+			toggle = { enabled = true }, -- Toggle functionality for UI features
+			
+			-- Simple Enhancements
+			input = { enabled = true }, -- Better vim.ui.input prompts
+			statuscolumn = { enabled = true }, -- Enhanced line numbers and gutter
 		}
 
 		local final_config = vim.tbl_deep_extend("force", default_config, user_config)

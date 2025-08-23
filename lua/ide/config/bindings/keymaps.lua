@@ -43,6 +43,14 @@ function M.setup(user_keymaps)
 		Snacks.picker.autocmds()
 	end, { desc = "Autocmds" })
 
+	-- Snacks UI Focus Features
+	map("n", "<leader>z", function()
+		Snacks.zen()
+	end, { desc = "Toggle Zen Mode" })
+	map("n", "<leader>Z", function()
+		Snacks.zen.zoom()
+	end, { desc = "Toggle Zoom" })
+
 	-- Tier 1 Snacks Features
 	map("n", "<leader>gg", function()
 		Snacks.lazygit()

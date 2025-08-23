@@ -74,6 +74,10 @@ return {
 
 			-- Buffer management enhancements
 			{ "<leader>bd", desc = "Delete Buffer (Smart)" },
+
+			-- UI Focus Features
+			{ "<leader>z", desc = "Toggle Zen Mode" },
+			{ "<leader>Z", desc = "Toggle Zoom" },
 		})
 	end,
 }
