@@ -88,9 +88,16 @@ function M.setup(user_keymaps)
 	end
 
 	-- Buffer Management (note: <leader>bd is handled by Snacks above)
-	map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-	map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
-	map("n", "<leader>ba", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete All Buffers" })
+	map("n", "<leader>bn", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+	map("n", "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous Buffer" })
+	map("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close Other Buffers" })
+	map("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close Buffers to Left" })
+	map("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", { desc = "Close Buffers to Right" })
+	
+	-- Buffer picking and navigation
+	map("n", "<leader>bo", "<cmd>BufferLinePick<cr>", { desc = "Pick Buffer" })
+	map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous Buffer" })
+	map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 
 	-- Window Management
 	map("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
