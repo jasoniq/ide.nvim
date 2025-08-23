@@ -4,7 +4,7 @@ local M = {}
 
 ---@param opts? IDEConfig
 function M.setup(opts)
-  require("ide.config").setup(opts)
+	require("ide.config").setup(opts)
 end
 
 return M
