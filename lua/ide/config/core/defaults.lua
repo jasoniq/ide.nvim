@@ -9,6 +9,7 @@ local defaults = {
     telescope = true,
     which_key = true,
     treesitter = true,
+    lsp = true,
   },
 }
 

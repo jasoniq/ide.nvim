@@ -1,7 +1,7 @@
--- Main plugin index that imports all organized plugin categories
+-- Main plugin index that imports all organized plugin categories (LazyVim style)
 return {
-  { import = "ide.plugins.core" },
+  { import = "ide.plugins.editor" },
+  { import = "ide.plugins.coding" },
   { import = "ide.plugins.ui" },
-  { import = "ide.plugins.editing" },
-  { import = "ide.plugins.search" },
+  { import = "ide.plugins.util" },
 }

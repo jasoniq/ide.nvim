@@ -2,6 +2,7 @@
 ---@field telescope? boolean
 ---@field which_key? boolean
 ---@field treesitter? boolean
+---@field lsp? boolean
 
 ---@class IDEVimOptions
 ---@field expandtab? boolean

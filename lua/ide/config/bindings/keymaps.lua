@@ -76,12 +76,42 @@ function M.setup(user_keymaps)
   map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
   map("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All" })
 
-  -- LSP-style mappings (if available)
-  map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
-  map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+  -- LSP - Language Server Protocol
+  if config.features.lsp then
+    -- Navigation
+    map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+    map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+    map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
+    map("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to Type Definition" })
+    map("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
+    
+    -- Documentation
+    map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+    map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+    
+    -- Code Actions
+    map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
+    map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
+    map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+    map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format Document" })
+    map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format Selection" })
+    
+    -- Diagnostics
+    map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })
+    map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+    map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+    map("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Diagnostics to Location List" })
+    
+    -- Workspace
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
+    map("n", "<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { desc = "List Workspace Folders" })
+    
+    -- Mason LSP Management
+    map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason LSP Manager" })
+  end
 
   -- Which-key helper
   if config.features.which_key then

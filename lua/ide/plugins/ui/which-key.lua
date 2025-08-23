@@ -36,5 +36,32 @@ return {
       { "<leader>t", group = "Treesitter", icon = "🌳" },
       { "<leader>c", group = "Code", icon = "💻" },
     })
+    
+    -- Additional registration for LSP mappings if LSP is enabled
+    local config = require("ide.config")
+    if config.features.lsp then
+      which_key.add({
+        -- Code group (<leader>c) - LSP actions
+        { "<leader>ca", desc = "Code Actions", mode = { "n", "v" } },
+        { "<leader>cr", desc = "Rename Symbol" },
+        { "<leader>cf", desc = "Format Document", mode = { "n", "v" } },
+        { "<leader>cd", desc = "Show Line Diagnostics" },
+        { "<leader>cq", desc = "Diagnostics to Location List" },
+        { "<leader>cm", desc = "Mason LSP Manager" },
+        
+        -- LSP Navigation (separate from leader groups)
+        { "g", group = "Go to (LSP)" },
+        { "gd", desc = "Go to Definition" },
+        { "gD", desc = "Go to Declaration" },  
+        { "gi", desc = "Go to Implementation" },
+        { "gt", desc = "Go to Type Definition" },
+        { "gr", desc = "Go to References" },
+        
+        -- Documentation & Diagnostics
+        { "K", desc = "Hover Documentation" },
+        { "[d", desc = "Previous Diagnostic" },
+        { "]d", desc = "Next Diagnostic" },
+      })
+    end
   end,
 }
