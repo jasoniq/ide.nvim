@@ -29,7 +29,7 @@ return {
     -- Register group names for organized display
     which_key.add({
       { "<leader>f", group = "Find (Telescope)", icon = "🔍" },
-      { "<leader>g", group = "Git (Telescope)", icon = "🌿" },
+      { "<leader>g", group = "Git", icon = "🌿" },
       { "<leader>s", group = "Snacks", icon = "🍿" },
       { "<leader>b", group = "Buffer", icon = "📄" },
       { "<leader>w", group = "Window", icon = "🪟" },
@@ -63,5 +63,16 @@ return {
         { "]d", desc = "Next Diagnostic" },
       })
     end
+    
+    -- Register Tier 1 Snacks features
+    which_key.add({
+      -- Git group enhancements
+      { "<leader>gg", desc = "LazyGit" },
+      { "<leader>gf", desc = "LazyGit File History" },
+      { "<leader>gl", desc = "LazyGit Log" },
+      
+      -- Buffer management
+      { "<leader>bd", desc = "Delete Buffer (Smart)" },
+    })
   end,
 }

@@ -26,6 +26,12 @@ function M.setup(user_keymaps)
   map("n", "<leader>sn", function() Snacks.picker.notifications() end, { desc = "Notifications" })
   map("n", "<leader>si", function() Snacks.picker.icons() end, { desc = "Icons" })
   map("n", "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
+  
+  -- Tier 1 Snacks Features
+  map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
+  map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "LazyGit File History" })
+  map("n", "<leader>gl", function() Snacks.lazygit.log() end, { desc = "LazyGit Log" })
+  map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer (Smart)" })
 
   -- Telescope - Find & Search
   if config.features.telescope then
@@ -57,8 +63,7 @@ function M.setup(user_keymaps)
     map("n", "<leader>tp", "<cmd>TSPlaygroundToggle<cr>", { desc = "Treesitter Playground" })
   end
 
-  -- Buffer Management
-  map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
+  -- Buffer Management (note: <leader>bd is handled by Snacks above)
   map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Buffer" })
   map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
   map("n", "<leader>ba", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete All Buffers" })
