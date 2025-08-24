@@ -35,6 +35,7 @@ return {
 			{ "<leader>w", group = "Window", icon = "🪟" },
 			{ "<leader>t", group = "Treesitter", icon = "🌳" },
 			{ "<leader>c", group = "Code", icon = "💻" },
+			{ "<leader>d", group = "Debug", icon = "🐛" },
 		})
 
 		-- Additional registration for LSP mappings if LSP is enabled
@@ -97,6 +98,24 @@ return {
 			{ "<leader>cR", desc = "Rename File (Smart)" },
 			{ "<leader>.", desc = "Toggle Scratch Buffer" },
 			{ "<leader>S", desc = "Select Scratch Buffer" },
+
+			-- Debug (DAP) group
+			{ "<leader>db", desc = "Toggle Breakpoint" },
+			{ "<leader>dB", desc = "Conditional Breakpoint" },
+			{ "<leader>dl", desc = "Log Point" },
+			{ "<leader>dc", desc = "Continue" },
+			{ "<leader>ds", desc = "Step Over" },
+			{ "<leader>di", desc = "Step Into" },
+			{ "<leader>do", desc = "Step Out" },
+			{ "<leader>dt", desc = "Terminate Debug" },
+			{ "<leader>du", desc = "Toggle Debug UI" },
+			{ "<leader>de", desc = "Evaluate Expression", mode = { "n", "v" } },
+			{ "<leader>dr", desc = "Open REPL" },
+			{ "<leader>dR", desc = "Run Last Debug" },
+			{ "<leader>dC", desc = "DAP Commands" },
+			{ "<leader>dv", desc = "DAP Variables" },
+			{ "<leader>df", desc = "DAP Frames" },
+			{ "<leader>dL", desc = "List Breakpoints" },
 		})
 	end,
 }

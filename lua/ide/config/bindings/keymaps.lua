@@ -212,6 +212,40 @@ function M.setup(user_keymaps)
 		map("n", "<leader>cR", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 	end
 
+	-- DAP - Debug Adapter Protocol
+	-- Breakpoints
+	map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
+	map("n", "<leader>dB", function() 
+		require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	end, { desc = "Conditional Breakpoint" })
+	map("n", "<leader>dl", function() 
+		require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+	end, { desc = "Log Point" })
+
+	-- Debug Control
+	map("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue" })
+	map("n", "<leader>ds", function() require("dap").step_over() end, { desc = "Step Over" })
+	map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Step Into" })
+	map("n", "<leader>do", function() require("dap").step_out() end, { desc = "Step Out" })
+	map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Terminate Debug" })
+
+	-- Debug UI
+	map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle Debug UI" })
+	map("n", "<leader>de", function() require("dapui").eval() end, { desc = "Evaluate Expression" })
+	map("v", "<leader>de", function() require("dapui").eval() end, { desc = "Evaluate Selection" })
+
+	-- Debug Sessions
+	map("n", "<leader>dr", function() require("dap").repl.open() end, { desc = "Open REPL" })
+	map("n", "<leader>dR", function() require("dap").run_last() end, { desc = "Run Last Debug" })
+
+	-- Telescope DAP (if telescope is enabled)
+	if config.features.telescope then
+		map("n", "<leader>dC", function() require("telescope").extensions.dap.commands() end, { desc = "DAP Commands" })
+		map("n", "<leader>dv", function() require("telescope").extensions.dap.variables() end, { desc = "DAP Variables" })
+		map("n", "<leader>df", function() require("telescope").extensions.dap.frames() end, { desc = "DAP Frames" })
+		map("n", "<leader>dL", function() require("telescope").extensions.dap.list_breakpoints() end, { desc = "List Breakpoints" })
+	end
+
 	-- Which-key helper
 	if config.features.which_key then
 		map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Show All Keymaps" })
