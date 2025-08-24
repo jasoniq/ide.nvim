@@ -55,6 +55,12 @@ function M.setup(user_keymaps)
 	map("n", "<leader>cR", function()
 		Snacks.rename.rename_file()
 	end, { desc = "Rename File (Smart)" })
+	map("n", "<leader>.", function()
+		Snacks.scratch()
+	end, { desc = "Toggle Scratch Buffer" })
+	map("n", "<leader>S", function()
+		Snacks.scratch.select()
+	end, { desc = "Select Scratch Buffer" })
 
 	-- Tier 1 Snacks Features
 	map("n", "<leader>gg", function()
@@ -138,6 +144,55 @@ function M.setup(user_keymaps)
 		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 		map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format Document" })
 		map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format Selection" })
+
+		-- Refactoring Operations
+		map({ "n", "x" }, "<leader>re", function() 
+			return require('refactoring').refactor('Extract Function') 
+		end, { expr = true, desc = "Extract Function" })
+		
+		map({ "n", "x" }, "<leader>rf", function() 
+			return require('refactoring').refactor('Extract Function To File') 
+		end, { expr = true, desc = "Extract Function To File" })
+		
+		map({ "n", "x" }, "<leader>rv", function() 
+			return require('refactoring').refactor('Extract Variable') 
+		end, { expr = true, desc = "Extract Variable" })
+		
+		map({ "n", "x" }, "<leader>ri", function() 
+			return require('refactoring').refactor('Inline Variable') 
+		end, { expr = true, desc = "Inline Variable" })
+		
+		map({ "n", "x" }, "<leader>rI", function() 
+			return require('refactoring').refactor('Inline Function') 
+		end, { expr = true, desc = "Inline Function" })
+		
+		map({ "n", "x" }, "<leader>rb", function() 
+			return require('refactoring').refactor('Extract Block') 
+		end, { expr = true, desc = "Extract Block" })
+		
+		map({ "n", "x" }, "<leader>rbf", function() 
+			return require('refactoring').refactor('Extract Block To File') 
+		end, { expr = true, desc = "Extract Block To File" })
+
+		-- Debug Operations
+		map({ "n", "x" }, "<leader>rp", function() 
+			require('refactoring').debug.printf() 
+		end, { desc = "Debug Print" })
+		
+		map({ "n", "x" }, "<leader>rP", function() 
+			require('refactoring').debug.print_var() 
+		end, { desc = "Print Variable" })
+		
+		map("n", "<leader>rc", function() 
+			require('refactoring').debug.cleanup({}) 
+		end, { desc = "Cleanup Debug Prints" })
+
+		-- Refactoring with Telescope
+		if config.features.telescope then
+			map({ "n", "x" }, "<leader>rr", function()
+				require('telescope').extensions.refactoring.refactors()
+			end, { desc = "Refactor Menu" })
+		end
 
 		-- Diagnostics
 		map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })

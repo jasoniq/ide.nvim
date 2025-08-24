@@ -38,6 +38,8 @@ return {
 			-- Development Tools
 			scope = { enabled = true }, -- Smart scope detection and text object jumping
 			rename = { enabled = true }, -- LSP-integrated file renaming
+			scratch = { enabled = true }, -- Temporary/persistent scratch buffers for quick notes
+			debug = { enabled = true }, -- Pretty debugging tools and data inspection
 		}
 
 		local final_config = vim.tbl_deep_extend("force", default_config, user_config)

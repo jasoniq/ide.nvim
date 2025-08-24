@@ -50,6 +50,20 @@ return {
 				{ "<leader>cm", desc = "Mason LSP Manager" },
 				{ "<leader>cR", desc = "Restart LSP" },
 
+				-- Refactoring group (<leader>r)
+				{ "<leader>r", group = "Refactor", icon = "🔧" },
+				{ "<leader>re", desc = "Extract Function", mode = { "n", "x" } },
+				{ "<leader>rf", desc = "Extract Function To File", mode = { "n", "x" } },
+				{ "<leader>rv", desc = "Extract Variable", mode = { "n", "x" } },
+				{ "<leader>ri", desc = "Inline Variable", mode = { "n", "x" } },
+				{ "<leader>rI", desc = "Inline Function", mode = { "n", "x" } },
+				{ "<leader>rb", desc = "Extract Block", mode = { "n", "x" } },
+				{ "<leader>rbf", desc = "Extract Block To File", mode = { "n", "x" } },
+				{ "<leader>rp", desc = "Debug Print", mode = { "n", "x" } },
+				{ "<leader>rP", desc = "Print Variable", mode = { "n", "x" } },
+				{ "<leader>rc", desc = "Cleanup Debug Prints", mode = "n" },
+				{ "<leader>rr", desc = "Refactor Menu", mode = { "n", "x" } },
+
 				-- LSP Navigation (separate from leader groups)
 				{ "g", group = "Go to (LSP)" },
 				{ "gd", desc = "Go to Definition" },
@@ -81,6 +95,8 @@ return {
 
 			-- Development Tools
 			{ "<leader>cR", desc = "Rename File (Smart)" },
+			{ "<leader>.", desc = "Toggle Scratch Buffer" },
+			{ "<leader>S", desc = "Select Scratch Buffer" },
 		})
 	end,
 }
