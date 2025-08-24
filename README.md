@@ -1,242 +1,373 @@
 # ide.nvim
 
-A modern, minimal IDE configuration for Neovim with carefully curated plugins and sensible defaults.
+A modern, comprehensive IDE configuration for Neovim built on minimal philosophy with enterprise-grade capabilities.
 
-## Installation
+## 🎯 Philosophy
+
+**Editor-Centric Development Experience**
+
+A truly productive IDE should maximize coding focus while minimizing visual noise. This configuration delivers professional-grade development capabilities through carefully curated plugins that integrate seamlessly, staying out of your way until needed.
+
+**Key Principles:**
+- **Minimal by default**: Only essential features enabled, others configurable
+- **Professional grade**: Enterprise debugging, refactoring, and language support
+- **Telescope-centric**: Use fuzzy finding over visual clutter
+- **Mason-managed**: Automatic tool installation and updates
+- **Cohesive integration**: All tools work together harmoniously
+
+## ⚡ Quick Start
 
 ### Requirements
-- Neovim 0.9+
+- Neovim 0.10+
 - [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
-- LazyVim (recommended) or compatible configuration
 
-### Setup
-1. Set your preferred `<leader>` prefix
-2. Add to your LazyVim plugins directory: `lua/plugins/ide.lua`
+### Installation
 
-### Full Configuration Example
+Add to your LazyVim plugins:
 
 ```lua
 {
-    "jasoniq/ide.nvim",
-    import = "ide.plugins",
-    config = function()
-        require("ide.config").setup({
-            -- Optional: Customize which features to enable/disable
-            features = {
-                telescope = true,     -- Fuzzy finder
-                which_key = true,     -- Key binding helper
-                treesitter = true,    -- Syntax highlighting
-            },
-            -- Optional: Change colorscheme (default: "catppuccin")
-            colorscheme = "catppuccin",
-            -- Optional: Plugin-specific configurations
-            plugins = {
-                catppuccin = { flavour = "mocha" },
-                snacks = { 
-                    explorer = { enabled = true },
-                    dashboard = { enabled = true, example = "advanced" }
-                },
-                telescope = { 
-                    defaults = { 
-                        layout_strategy = "horizontal" 
-                    }
-                },
-                treesitter = {
-                    ensure_installed = { "lua", "python", "javascript" }
-                }
-            },
-            -- Optional: Custom keymaps
-            keymaps = {
-                n = {
-                    ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
-                }
-            }
-        })
-    end
+  "jasoniq/ide.nvim",
+  import = "ide.plugins",
+  config = function()
+    require("ide.config").setup()
+  end
 }
 ```
 
-### Minimal Setup
+## 🏗️ Complete Feature Set
 
-```lua
-{
-    "jasoniq/ide.nvim",
-    import = "ide.plugins",
-    config = function()
-        require("ide.config").setup()  -- Uses all defaults
-    end
-}
-```
+### Core Foundation
+- **Plugin Management**: LazyVim-style organization with lazy loading
+- **Configuration**: Centralized config system with user customization
+- **UI**: Catppuccin theme + Lualine statusline + smooth animations
 
-## Configuration Options
+### 🔍 Navigation & Search
+- **Telescope**: Fuzzy finding for files, text, buffers, and more
+- **Snacks Explorer**: Modern file browser with project navigation
+- **Smart Scope**: Treesitter-based semantic code navigation
+- **Which-Key**: Interactive keymap discovery
 
-### Features
-Control which optional plugins are loaded:
-- `telescope`: Fuzzy finder (default: true) 
-- `which_key`: Key binding helper (default: true)
-- `treesitter`: Syntax highlighting (default: true)
+### 💻 Language Support
+- **LSP**: Full Language Server Protocol with Mason management
+- **Completion**: nvim-cmp with intelligent suggestions and snippets
+- **Treesitter**: Advanced syntax highlighting and code understanding
+- **Mason**: Automatic LSP server, formatter, and linter installation
 
-**Core components** (always included):
-- File explorer via snacks (`<leader>e`)
-- Dashboard with project shortcuts (`<leader>d`)
-- Catppuccin colorscheme + live theme picker (`<leader>sc`)
+### 🔧 Professional Refactoring
+- **Extract Operations**: Functions, variables, blocks to files
+- **Inline Operations**: Variables and functions
+- **Debug Workflow**: Smart debug print insertion and cleanup
+- **Telescope Integration**: Refactoring command discovery
+- **Multi-Language**: JavaScript, Python, Go, TypeScript, and more
 
-### Plugin Configuration
-Each plugin can be customized via the `plugins` table:
+### 🐛 Enterprise Debugging
+- **Visual Debugging**: Full DAP (Debug Adapter Protocol) with UI
+- **Multi-Language**: Python, Node.js, Go debuggers via Mason
+- **Professional Features**: Breakpoints, variable inspection, call stacks
+- **Advanced Capabilities**: Conditional breakpoints, log points, REPL
 
-```lua
-plugins = {
-    -- Colorscheme options
-    catppuccin = { flavour = "mocha" },
-    
-    -- Snacks UI components
-    snacks = { 
-        dashboard = { enabled = true, example = "advanced" },
-        explorer = { enabled = true }
-    },
-    
-    -- Language support (only installs what you specify)
-    treesitter = {
-        ensure_installed = { "lua", "python", "javascript" }
-    },
-    
-    -- Fuzzy finder customization
-    telescope = { 
-        defaults = { layout_strategy = "horizontal" }
-    }
-}
-```
+### ⚡ Productivity & Focus
+- **Focus Modes**: Zen mode and zoom for distraction-free coding
+- **Scratch Buffers**: Quick notes and experimentation
+- **Git Integration**: LazyGit with file history and status
+- **Smart Buffers**: Intelligent buffer management preserving window layouts
 
-### Vim Options
-Customize editor behavior while preserving IDE essentials:
+## 📖 Complete Keymap Reference
 
-```lua
-options = {
-    -- Indentation (default: 2 spaces)
-    shiftwidth = 4,
-    tabstop = 4,
-    
-    -- Interface preferences
-    number = true,
-    cursorline = true,
-    clipboard = "unnamedplus"
-}
-```
-
-### Default Keymaps
-
-The IDE uses a **hybrid approach** combining the best of both worlds:
-
-#### Core Navigation
-- `<leader>e` - File Explorer (snacks)
-- `<leader>d` - Dashboard (snacks)
-- `<Esc>` - Clear search highlights
+### Core Navigation
+- `<leader>e` - File Explorer
+- `<leader>d` - Dashboard
+- `<Esc>` - Clear search highlights  
 - `<C-s>` - Save file
 
-#### 🍿 Snacks - UI & Project Management (`<leader>s`)
-- `<leader>sr` - Recent Files
-- `<leader>sp` - Projects  
-- `<leader>sc` - Colorscheme Picker (switch themes live)
-- `<leader>sn` - Notifications
-- `<leader>si` - Icons
-- `<leader>sa` - Autocmds
-
-#### 🔍 Telescope - Find & Search (`<leader>f`)
+### 🔍 Telescope - Find & Search (`<leader>f`)
 - `<leader>ff` - Find Files
-- `<leader>fr` - Recent Files
+- `<leader>fr` - Recent Files  
 - `<leader>fg` - Git Files
 - `<leader>fw` - Find Word (live grep)
 - `<leader>fc` - Find Word under Cursor
 - `<leader>fb` - Find Buffers
+- `<leader>ft` - Find Text in Buffer
 - `<leader>fh` - Find Help
 - `<leader>fk` - Find Keymaps
+- `<leader>fm` - Find Marks
 
-#### 🌿 Git via Telescope (`<leader>g`)
-- `<leader>gc` - Git Commits
-- `<leader>gs` - Git Status
-- `<leader>gb` - Git Branches
+### 🍿 Snacks - UI & Project (`<leader>s`)
+- `<leader>sr` - Recent Files (Snacks)
+- `<leader>sp` - Projects
+- `<leader>sc` - Colorschemes (live switching)
+- `<leader>sn` - Notifications
+- `<leader>si` - Icons
+- `<leader>sa` - Autocmds
 
-#### Buffer Management (`<leader>b`)
-- `<leader>bd` - Delete Buffer
+### 🌿 Git Integration (`<leader>g`)
+- `<leader>gg` - LazyGit
+- `<leader>gf` - LazyGit File History
+- `<leader>gl` - LazyGit Log
+- `<leader>gc` - Git Commits (Telescope)
+- `<leader>gs` - Git Status (Telescope)  
+- `<leader>gb` - Git Branches (Telescope)
+
+### 🔧 Refactoring (`<leader>r`)
+**Code Structure:**
+- `<leader>re` - Extract Function
+- `<leader>rf` - Extract Function to File
+- `<leader>rv` - Extract Variable
+- `<leader>ri` - Inline Variable
+- `<leader>rI` - Inline Function
+- `<leader>rb` - Extract Block
+- `<leader>rbf` - Extract Block to File
+- `<leader>rr` - Refactoring Menu (Telescope)
+
+**Debug Workflow:**
+- `<leader>rp` - Debug Print
+- `<leader>rP` - Print Variable
+- `<leader>rc` - Cleanup Debug Prints
+
+### 🐛 Debugging (`<leader>d`)
+**Breakpoints:**
+- `<leader>db` - Toggle Breakpoint
+- `<leader>dB` - Conditional Breakpoint
+- `<leader>dl` - Log Point
+- `<leader>dL` - List Breakpoints (Telescope)
+
+**Debug Control:**
+- `<leader>dc` - Continue/Start Debug
+- `<leader>ds` - Step Over
+- `<leader>di` - Step Into
+- `<leader>do` - Step Out  
+- `<leader>dt` - Terminate Debug
+
+**Debug UI & Analysis:**
+- `<leader>du` - Toggle Debug UI
+- `<leader>de` - Evaluate Expression
+- `<leader>dr` - Open REPL
+- `<leader>dR` - Run Last Debug
+- `<leader>dC` - DAP Commands (Telescope)
+- `<leader>dv` - DAP Variables (Telescope)
+- `<leader>df` - DAP Frames (Telescope)
+
+### 💻 Code & LSP (`<leader>c`)
+**Navigation:**
+- `gd` - Go to Definition
+- `gD` - Go to Declaration
+- `gi` - Go to Implementation
+- `gt` - Go to Type Definition
+- `gr` - Go to References
+
+**Code Actions:**
+- `<leader>ca` - Code Actions
+- `<leader>cr` - Rename Symbol (LSP)
+- `<leader>cf` - Format Document
+- `<leader>cd` - Show Diagnostics
+- `<leader>cq` - Diagnostics to Location List
+
+**Management:**
+- `<leader>cm` - Mason LSP Manager
+- `<leader>cR` - Restart LSP (or Rename File - Smart)
+
+### Buffer Management (`<leader>b`)
+- `<leader>bd` - Delete Buffer (Smart)
 - `<leader>bn` - Next Buffer
 - `<leader>bp` - Previous Buffer
-- `<leader>ba` - Delete All Buffers
+- `<S-h>` - Previous Buffer
+- `<S-l>` - Next Buffer
 
-#### Window Management (`<leader>w`)
+### Window Management (`<leader>w`)
 - `<leader>wv` - Vertical Split
 - `<leader>wh` - Horizontal Split
 - `<leader>wc` - Close Window
 - `<leader>wo` - Only Window
 - `<leader>w=` - Equalize Windows
 
-#### Code Actions
-- `gd` - Go to Definition (LSP)
-- `gr` - Go to References (LSP) 
-- `K` - Hover Documentation (LSP)
-- `<leader>ca` - Code Actions (LSP)
-- `<leader>rn` - Rename Symbol (LSP)
+### Focus & Productivity
+- `<leader>z` - Toggle Zen Mode
+- `<leader>Z` - Toggle Zoom
+- `<leader>.` - Toggle Scratch Buffer
+- `<leader>S` - Select Scratch Buffer
 
-#### Quick Actions
+### Treesitter (`<leader>t`)
+- `<leader>ts` - Toggle Syntax Highlighting
+- `<leader>tp` - Treesitter Playground
+
+### Quick Actions
 - `<leader>q` - Quit
+- `<leader>Q` - Quit All
 - `<leader>w` - Save
+- `<leader>W` - Save All
 - `<leader>/` - Toggle Comment
+- `K` - Hover Documentation
+- `[d` / `]d` - Previous/Next Diagnostic
 
-### Custom Keymaps
-Add your own keymaps via configuration:
+## 🛠️ Configuration
+
+### Basic Setup
 ```lua
-keymaps = {
-    n = {
-        ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
-    }
+{
+  "jasoniq/ide.nvim",
+  import = "ide.plugins", 
+  config = function()
+    require("ide.config").setup()  -- Uses all defaults
+  end
 }
 ```
 
-## IDE Philosophy
+### Advanced Configuration
+```lua
+{
+  "jasoniq/ide.nvim",
+  import = "ide.plugins",
+  config = function()
+    require("ide.config").setup({
+      -- Feature toggles
+      features = {
+        telescope = true,     -- Fuzzy finder
+        which_key = true,     -- Keymap helper  
+        treesitter = true,    -- Syntax highlighting
+        lsp = true,          -- Language servers
+      },
+      
+      -- Colorscheme
+      colorscheme = "catppuccin", -- or function() return "gruvbox" end
+      
+      -- Plugin-specific configs
+      plugins = {
+        catppuccin = { flavour = "mocha" },
+        treesitter = {
+          ensure_installed = { "lua", "python", "javascript", "typescript" }
+        },
+        telescope = {
+          defaults = { layout_strategy = "horizontal" }
+        },
+        mason = {
+          ensure_installed = { "lua_ls", "pyright", "tsserver" }
+        }
+      },
+      
+      -- Custom vim options
+      options = {
+        shiftwidth = 4,
+        tabstop = 4,
+        number = true,
+        relativenumber = true,
+      },
+      
+      -- Additional keymaps
+      keymaps = {
+        n = {
+          ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
+        }
+      }
+    })
+  end
+}
+```
 
-**Editor-Centric Development Experience**
-
-A truly productive IDE should maximize coding focus while minimizing visual noise. The editor window is your primary workspace—everything else should enhance this experience without competing for attention.
-
-This project delivers essential IDE functionality through carefully curated, optional plugins that integrate seamlessly. Rather than overwhelming you with panels and widgets, it provides powerful tools that stay out of your way until needed.
-
-**Key Principles:**
-- **Minimal by default**: Only load what you actually use
-- **Configurable without complexity**: Sensible defaults, easy customization
-- **Integrated experience**: Cohesive tools that work together naturally
-- **Performance focused**: Fast startup, responsive editing
-
-## What's Included
+## 📦 Included Plugins
 
 ### Core Foundation
-Essential utilities that form the IDE backbone:
-- **[Plenary](https://github.com/nvim-lua/plenary.nvim)** - Lua utility functions for plugin ecosystem
-- **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)** - Seamless navigation between vim splits and tmux panes
+- **[lazy.nvim](https://github.com/folke/lazy.nvim)** - Modern plugin manager
+- **[plenary.nvim](https://github.com/nvim-lua/plenary.nvim)** - Lua utility functions
+- **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)** - Seamless vim/tmux navigation
 
-### Integrated UI System
-**[Snacks.nvim](https://github.com/folke/snacks.nvim)** provides UI and project management:
-- **Dashboard** - Clean startup screen with project shortcuts (`<leader>d`)
-- **File Explorer** - Modern picker-style file browsing (`<leader>e`)
-- **Project Picker** - Quick project switching (`<leader>sp`)
-- **Utilities** - Notifications, colorschemes, icons (`<leader>s*`)
+### UI & Navigation
+- **[snacks.nvim](https://github.com/folke/snacks.nvim)** - Modern UI components and utilities
+- **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)** - Fuzzy finder and picker
+- **[which-key.nvim](https://github.com/folke/which-key.nvim)** - Interactive keymap help
+- **[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)** - Statusline
+- **[catppuccin](https://github.com/catppuccin/nvim)** - Modern colorscheme
 
-### Smart Code Features
-**[Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** (optional)
-- Advanced syntax highlighting and code understanding
-- Language parsers installed on-demand to keep setup lean
+### Language Support
+- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)** - LSP client configurations
+- **[mason.nvim](https://github.com/williamboman/mason.nvim)** - LSP/DAP/linter installer
+- **[mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)** - Mason LSP integration
+- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)** - Completion engine
+- **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** - Syntax highlighting
 
-**[Telescope](https://github.com/nvim-telescope/telescope.nvim)** (optional)
-- Battle-tested search and navigation (`<leader>f*`)
-- LSP integration, git operations, buffer management
-- Mature ecosystem with extensive customization options
+### Refactoring & Code Quality  
+- **[refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)** - Advanced refactoring operations
+- **[telescope-refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)** - Telescope integration
 
-**[Which-Key](https://github.com/folke/which-key.nvim)** (optional)
-- Interactive keymap help for discovering shortcuts
-- Self-documenting workflow
+### Professional Debugging
+- **[nvim-dap](https://github.com/mfussenegger/nvim-dap)** - Debug Adapter Protocol client
+- **[nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)** - Debug UI interface  
+- **[nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)** - Inline variable display
+- **[mason-nvim-dap.nvim](https://github.com/jay-babu/mason-nvim-dap.nvim)** - Mason DAP integration
+- **[telescope-dap.nvim](https://github.com/nvim-telescope/telescope-dap.nvim)** - Telescope DAP integration
 
-### Visual Experience
-**Integrated Colorscheme Management**:
-- **Catppuccin** set as default theme (provided by snacks plugin)
-- **Live theme switching** via snacks picker (`<leader>sc`)
-- **Runtime discovery** - try different colorschemes without restart
-- **Consistent theming** across the entire plugin ecosystem
+## 🚀 Language Support
 
+Out-of-the-box support for:
+- **Lua** - Full LSP, debugging, and Neovim development
+- **Python** - LSP, formatting, debugging with debugpy
+- **JavaScript/TypeScript** - LSP, formatting, Node.js debugging
+- **Go** - LSP support with Delve debugger
+- **And many more** - Easily add any language via Mason
+
+## 🎨 Customization
+
+### Adding Languages
+Languages are added automatically via Mason. To ensure specific ones are installed:
+
+```lua
+plugins = {
+  mason = {
+    ensure_installed = { "lua_ls", "pyright", "tsserver", "gopls" }
+  },
+  treesitter = {
+    ensure_installed = { "lua", "python", "javascript", "go" }
+  }
+}
+```
+
+### Custom Themes
+```lua
+-- Static theme
+colorscheme = "gruvbox"
+
+-- Dynamic theme  
+colorscheme = function() 
+  return vim.fn.input("Colorscheme: ", "catppuccin")
+end
+```
+
+### Plugin Customization
+Each plugin can be configured via the `plugins` table. See plugin documentation for available options.
+
+## 🔧 Advanced Features
+
+### Debug Workflow
+- **Multi-language debugging** with automatic adapter installation
+- **Visual debugging interface** with variable inspection
+- **Professional breakpoint management** including conditional and log points
+- **REPL integration** for interactive debugging sessions
+
+### Refactoring Capabilities
+- **Extract functions and variables** from selected code
+- **Inline operations** to simplify code structure  
+- **Block extraction** to separate files
+- **Debug print management** for development workflow
+- **Telescope integration** for command discovery
+
+### Focus & Productivity
+- **Zen mode** for distraction-free coding
+- **Scratch buffers** for quick experimentation
+- **Smart buffer management** preserving window layouts
+- **Project-aware navigation** with recent files and git integration
+
+## 📚 Philosophy & Design
+
+This IDE configuration prioritizes:
+
+1. **Editor Focus**: The code editor remains the primary interface
+2. **Minimal Cognitive Load**: Features appear when needed, not always visible
+3. **Professional Capability**: Enterprise-grade debugging and refactoring
+4. **Consistent Experience**: All tools integrate seamlessly
+5. **Performance**: Fast startup and responsive editing
+
+The result is a development environment that feels like a natural extension of Neovim while providing the sophisticated tooling expected in modern software development.
+
+## 🤝 Contributing
+
+This configuration represents a curated, opinionated IDE setup. While customization is extensive, the core philosophy of minimal, focused, professional tooling should be maintained in any contributions.
