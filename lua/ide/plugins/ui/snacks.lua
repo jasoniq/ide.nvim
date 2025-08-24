@@ -34,6 +34,10 @@ return {
 			-- Simple Enhancements
 			input = { enabled = true }, -- Better vim.ui.input prompts
 			statuscolumn = { enabled = true }, -- Enhanced line numbers and gutter
+			
+			-- Development Tools
+			scope = { enabled = true }, -- Smart scope detection and text object jumping
+			rename = { enabled = true }, -- LSP-integrated file renaming
 		}
 
 		local final_config = vim.tbl_deep_extend("force", default_config, user_config)

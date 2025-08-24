@@ -78,6 +78,9 @@ return {
 			-- UI Focus Features
 			{ "<leader>z", desc = "Toggle Zen Mode" },
 			{ "<leader>Z", desc = "Toggle Zoom" },
+
+			-- Development Tools
+			{ "<leader>cR", desc = "Rename File (Smart)" },
 		})
 	end,
 }

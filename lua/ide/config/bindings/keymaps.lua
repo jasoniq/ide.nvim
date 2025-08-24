@@ -51,6 +51,11 @@ function M.setup(user_keymaps)
 		Snacks.zen.zoom()
 	end, { desc = "Toggle Zoom" })
 
+	-- Snacks Development Tools
+	map("n", "<leader>cR", function()
+		Snacks.rename.rename_file()
+	end, { desc = "Rename File (Smart)" })
+
 	-- Tier 1 Snacks Features
 	map("n", "<leader>gg", function()
 		Snacks.lazygit()
