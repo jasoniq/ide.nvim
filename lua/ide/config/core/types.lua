@@ -1,11 +1,11 @@
 ---@class IDEFeatures
----@field telescope? boolean
----@field which_key? boolean
----@field treesitter? boolean
----@field lsp? boolean
----@field lualine? boolean
----@field refactoring? boolean
----@field dap? boolean
+---@field finder? boolean -- Fuzzy finding with Telescope
+---@field keybind_help? boolean -- Keybinding help with Which-key
+---@field syntax_highlighting? boolean -- Syntax highlighting with Treesitter
+---@field lsp? boolean -- Language Server Protocol support
+---@field statusline? boolean -- Enhanced statusline with Lualine
+---@field refactoring? boolean -- Code refactoring tools
+---@field debugging? boolean -- Debug Adapter Protocol (DAP) support
 
 ---@class IDEVimOptions
 ---@field expandtab? boolean

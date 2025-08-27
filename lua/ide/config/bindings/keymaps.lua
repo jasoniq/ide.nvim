@@ -77,7 +77,7 @@ function M.setup(user_keymaps)
   end, { desc = "Delete Buffer (Smart)" })
 
   -- Telescope - Find & Search
-  if config.features.telescope then
+  if config.features.finder then
     -- Files
     map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
     map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
@@ -101,7 +101,7 @@ function M.setup(user_keymaps)
   end
 
   -- Treesitter - Code Navigation & Selection
-  if config.features.treesitter then
+  if config.features.syntax_highlighting then
     map("n", "<leader>ts", "<cmd>TSToggle highlight<cr>", { desc = "Toggle Syntax Highlighting" })
     map("n", "<leader>tp", "<cmd>TSPlaygroundToggle<cr>", { desc = "Treesitter Playground" })
   end
@@ -188,7 +188,7 @@ function M.setup(user_keymaps)
     end, { desc = "Cleanup Debug Prints" })
 
     -- Refactoring with Telescope
-    if config.features.telescope then
+    if config.features.finder then
       map({ "n", "x" }, "<leader>rr", function()
         require("telescope").extensions.refactoring.refactors()
       end, { desc = "Refactor Menu" })
@@ -260,8 +260,8 @@ function M.setup(user_keymaps)
     require("dap").run_last()
   end, { desc = "Run Last Debug" })
 
-  -- Telescope DAP (if telescope is enabled)
-  if config.features.telescope then
+  -- Telescope DAP (if finder is enabled)
+  if config.features.finder then
     map("n", "<leader>dC", function()
       require("telescope").extensions.dap.commands()
     end, { desc = "DAP Commands" })
@@ -277,7 +277,7 @@ function M.setup(user_keymaps)
   end
 
   -- Which-key helper
-  if config.features.which_key then
+  if config.features.keybind_help then
     map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Show All Keymaps" })
   end
 

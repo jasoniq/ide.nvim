@@ -1,8 +1,8 @@
 local config = require("ide.config")
 
--- Only load if lualine feature is enabled (default to true if config not available yet)
+-- Only load if statusline feature is enabled (default to true if config not available yet)
 local features = config.features or {}
-if features.lualine == false then
+if features.statusline == false then
   return {}
 end
 

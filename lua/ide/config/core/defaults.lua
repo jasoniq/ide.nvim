@@ -5,13 +5,13 @@ local defaults = {
   options = {},
   keymaps = {},
   features = {
-    telescope = true,
-    which_key = true,
-    treesitter = true,
+    finder = true,
+    keybind_help = true,
+    syntax_highlighting = true,
     lsp = true,
-    lualine = true,
+    statusline = true,
     refactoring = true,
-    dap = true,
+    debugging = true,
   },
 }
 

@@ -113,13 +113,13 @@ return {
       end,
     },
 
-    -- Telescope integration (if telescope is enabled)
+    -- Telescope integration (if finder is enabled)
     {
       "nvim-telescope/telescope-dap.nvim",
       config = function()
         local config = require("ide.config")
         local features = config.features or {}
-        if features.telescope ~= false then
+        if features.finder ~= false then
           require("telescope").load_extension("dap")
         end
       end,

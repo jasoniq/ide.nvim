@@ -1,7 +1,7 @@
--- Only return the plugin if which_key feature is enabled (default to true if config not available yet)
+-- Only return the plugin if keybind_help feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
 local features = config.features or {}
-if features.which_key == false then
+if features.keybind_help == false then
   return {}
 end
 

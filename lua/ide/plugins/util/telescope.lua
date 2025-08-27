@@ -1,7 +1,7 @@
--- Only return the plugin if telescope feature is enabled (default to true if config not available yet)
+-- Only return the plugin if finder feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
 local features = config.features or {}
-if features.telescope == false then
+if features.finder == false then
   return {}
 end
 

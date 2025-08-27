@@ -1,7 +1,7 @@
--- Only return the plugin if treesitter feature is enabled (default to true if config not available yet)
+-- Only return the plugin if syntax_highlighting feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
 local features = config.features or {}
-if features.treesitter == false then
+if features.syntax_highlighting == false then
   return {}
 end
 
