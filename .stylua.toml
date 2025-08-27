@@ -1,0 +1,13 @@
+# StyLua configuration for ide.nvim
+# Documentation: https://github.com/JohnnyMorganz/StyLua
+
+# Basic formatting options
+column_width = 120
+line_endings = "Unix"
+indent_type = "Spaces"
+indent_width = 2
+quote_style = "AutoPreferDouble"
+call_parentheses = "Always"
+
+# Advanced formatting
+collapse_simple_statement = "Never"
