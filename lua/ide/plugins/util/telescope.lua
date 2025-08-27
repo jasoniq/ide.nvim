@@ -1,7 +1,7 @@
+-- Only return the plugin if telescope feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if telescope feature is enabled
-if not config.features.telescope then
+local features = config.features or {}
+if features.telescope == false then
 	return {}
 end
 
@@ -13,14 +13,9 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 	},
-	config = function()
-		local telescope = require("telescope")
+	opts = function()
 		local actions = require("telescope.actions")
-
-		-- Get user configuration for telescope
-		local user_config = config.plugins.telescope or {}
-
-		local default_config = {
+		return {
 			defaults = {
 				path_display = { "smart" },
 				mappings = {
@@ -32,10 +27,9 @@ return {
 				},
 			},
 		}
-
-		local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-		telescope.setup(final_config)
-
-		telescope.load_extension("fzf")
+	end,
+	config = function(_, opts)
+		require("telescope").setup(opts)
+		require("telescope").load_extension("fzf")
 	end,
 }

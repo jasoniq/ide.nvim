@@ -1,7 +1,7 @@
+-- Only return the plugin if which_key feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if which_key feature is enabled
-if not config.features.which_key then
+local features = config.features or {}
+if features.which_key == false then
 	return {}
 end
 
@@ -12,19 +12,13 @@ return {
 		vim.o.timeout = true
 		vim.o.timeoutlen = 500
 	end,
-	config = function()
+	opts = {
+		preset = "modern",
+		delay = 300,
+	},
+	config = function(_, opts)
 		local which_key = require("which-key")
-
-		-- Get user configuration for which-key
-		local user_config = config.plugins.which_key or {}
-
-		local default_config = {
-			preset = "modern",
-			delay = 300,
-		}
-
-		local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-		which_key.setup(final_config)
+		which_key.setup(opts)
 
 		-- Register group names for organized display
 		which_key.add({
@@ -39,8 +33,8 @@ return {
 		})
 
 		-- Additional registration for LSP mappings if LSP is enabled
-		local config = require("ide.config")
-		if config.features.lsp then
+		local features = config.features or {}
+		if features.lsp ~= false then
 			which_key.add({
 				-- Code group (<leader>c) - LSP actions
 				{ "<leader>ca", desc = "Code Actions", mode = { "n", "v" } },

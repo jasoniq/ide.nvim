@@ -4,12 +4,14 @@ local defaults = {
 	colorscheme = "catppuccin",
 	options = {},
 	keymaps = {},
-	plugins = {},
 	features = {
 		telescope = true,
 		which_key = true,
 		treesitter = true,
 		lsp = true,
+		lualine = true,
+		refactoring = true,
+		dap = true,
 	},
 }
 

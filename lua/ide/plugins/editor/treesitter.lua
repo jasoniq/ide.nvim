@@ -1,7 +1,7 @@
+-- Only return the plugin if treesitter feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if treesitter feature is enabled
-if not config.features.treesitter then
+local features = config.features or {}
+if features.treesitter == false then
 	return {}
 end
 
@@ -20,40 +20,29 @@ return {
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 	},
-	config = function()
-		-- import nvim-treesitter plugin
-		local treesitter = require("nvim-treesitter.configs")
-
-		-- Get user configuration for treesitter
-		local user_config = config.plugins.treesitter or {}
-
-		local default_config = {
-			-- enable syntax highlighting
-			highlight = {
-				enable = true,
+	opts = {
+		-- enable syntax highlighting
+		highlight = {
+			enable = true,
+		},
+		-- enable indentation
+		indent = { enable = true },
+		-- enable autotagging (w/ nvim-ts-autotag plugin)
+		autotag = {
+			enable = true,
+		},
+		-- ensure these language parsers are installed
+		ensure_installed = {
+			-- Add language parsers here, e.g. "lua", "python"
+		},
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<C-space>",
+				node_incremental = "<C-space>",
+				scope_incremental = false,
+				node_decremental = "<bs>",
 			},
-			-- enable indentation
-			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
-			-- ensure these language parsers are installed
-			ensure_installed = {
-				-- Add language parsers here, e.g. "lua", "python"
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-		}
-
-		local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-		treesitter.setup(final_config)
-	end,
+		},
+	},
 }

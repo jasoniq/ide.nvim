@@ -1,7 +1,7 @@
+-- Only return the plugin if lsp feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if lsp feature is enabled
-if not config.features.lsp then
+local features = config.features or {}
+if features.lsp == false then
 	return {}
 end
 
@@ -13,47 +13,32 @@ return {
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		build = ":MasonUpdate",
 		opts_extend = { "ensure_installed" },
-		config = function()
-			-- Get user configuration for mason
-			local user_config = config.plugins.mason or {}
-
-			local default_config = {
-				ensure_installed = {
-					-- Language servers will be installed based on user preference
-					-- No servers installed by default to keep minimal
+		opts = {
+			ensure_installed = {
+				-- Language servers will be installed based on user preference
+				-- No servers installed by default to keep minimal
+			},
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
 				},
-				ui = {
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
-				},
-			}
-
-			local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-			require("mason").setup(final_config)
-		end,
+			},
+		},
 	},
 
 	-- Mason-lspconfig for automatic LSP server setup
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "mason.nvim" },
-		config = function()
-			local user_config = config.plugins.mason_lspconfig or {}
-
-			local default_config = {
-				-- Install servers but don't auto-configure them (we handle configuration manually)
-				automatic_installation = false,
-				automatic_enable = false, -- Disable auto-setup, we'll configure manually
-				ensure_installed = {
-					"lua_ls", -- Include lua_ls for Neovim config development
-				},
-			}
-
-			local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-			require("mason-lspconfig").setup(final_config)
-		end,
+		opts = {
+			-- Install servers but don't auto-configure them (we handle configuration manually)
+			automatic_installation = false,
+			automatic_enable = false, -- Disable auto-setup, we'll configure manually
+			ensure_installed = {
+				"lua_ls", -- Include lua_ls for Neovim config development
+			},
+		},
 	},
 }

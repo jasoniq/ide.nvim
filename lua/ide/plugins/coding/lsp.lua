@@ -1,7 +1,7 @@
+-- Only return the plugin if lsp feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if lsp feature is enabled
-if not config.features.lsp then
+local features = config.features or {}
+if features.lsp == false then
 	return {}
 end
 
@@ -14,8 +14,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
-		-- Get user configuration for lspconfig
-		local user_config = config.plugins.lspconfig or {}
+		-- LSP configuration is now handled via lazy.nvim overrides
 
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
@@ -80,11 +79,6 @@ return {
 		local function on_attach(client, bufnr)
 			-- Enable completion triggered by <c-x><c-o>
 			vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-			-- User-defined on_attach function
-			if user_config.on_attach then
-				user_config.on_attach(client, bufnr)
-			end
 		end
 
 		-- Configure default settings for all LSP servers
@@ -97,14 +91,7 @@ return {
 
 		-- Set up specific server configurations
 		-- lua_ls with our enhanced Neovim configuration
-		lspconfig.lua_ls.setup(
-			vim.tbl_deep_extend(
-				"force",
-				default_lsp_config,
-				default_server_configs.lua_ls or {},
-				user_config.servers and user_config.servers.lua_ls or {}
-			)
-		)
+		lspconfig.lua_ls.setup(vim.tbl_deep_extend("force", default_lsp_config, default_server_configs.lua_ls or {}))
 
 		-- Other servers will use mason's automatic setup with our defaults applied via lspconfig's default_config
 

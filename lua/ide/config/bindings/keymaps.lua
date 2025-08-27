@@ -146,51 +146,51 @@ function M.setup(user_keymaps)
 		map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format Selection" })
 
 		-- Refactoring Operations
-		map({ "n", "x" }, "<leader>re", function() 
-			return require('refactoring').refactor('Extract Function') 
+		map({ "n", "x" }, "<leader>re", function()
+			return require("refactoring").refactor("Extract Function")
 		end, { expr = true, desc = "Extract Function" })
-		
-		map({ "n", "x" }, "<leader>rf", function() 
-			return require('refactoring').refactor('Extract Function To File') 
+
+		map({ "n", "x" }, "<leader>rf", function()
+			return require("refactoring").refactor("Extract Function To File")
 		end, { expr = true, desc = "Extract Function To File" })
-		
-		map({ "n", "x" }, "<leader>rv", function() 
-			return require('refactoring').refactor('Extract Variable') 
+
+		map({ "n", "x" }, "<leader>rv", function()
+			return require("refactoring").refactor("Extract Variable")
 		end, { expr = true, desc = "Extract Variable" })
-		
-		map({ "n", "x" }, "<leader>ri", function() 
-			return require('refactoring').refactor('Inline Variable') 
+
+		map({ "n", "x" }, "<leader>ri", function()
+			return require("refactoring").refactor("Inline Variable")
 		end, { expr = true, desc = "Inline Variable" })
-		
-		map({ "n", "x" }, "<leader>rI", function() 
-			return require('refactoring').refactor('Inline Function') 
+
+		map({ "n", "x" }, "<leader>rI", function()
+			return require("refactoring").refactor("Inline Function")
 		end, { expr = true, desc = "Inline Function" })
-		
-		map({ "n", "x" }, "<leader>rb", function() 
-			return require('refactoring').refactor('Extract Block') 
+
+		map({ "n", "x" }, "<leader>rb", function()
+			return require("refactoring").refactor("Extract Block")
 		end, { expr = true, desc = "Extract Block" })
-		
-		map({ "n", "x" }, "<leader>rbf", function() 
-			return require('refactoring').refactor('Extract Block To File') 
+
+		map({ "n", "x" }, "<leader>rbf", function()
+			return require("refactoring").refactor("Extract Block To File")
 		end, { expr = true, desc = "Extract Block To File" })
 
 		-- Debug Operations
-		map({ "n", "x" }, "<leader>rp", function() 
-			require('refactoring').debug.printf() 
+		map({ "n", "x" }, "<leader>rp", function()
+			require("refactoring").debug.printf()
 		end, { desc = "Debug Print" })
-		
-		map({ "n", "x" }, "<leader>rP", function() 
-			require('refactoring').debug.print_var() 
+
+		map({ "n", "x" }, "<leader>rP", function()
+			require("refactoring").debug.print_var()
 		end, { desc = "Print Variable" })
-		
-		map("n", "<leader>rc", function() 
-			require('refactoring').debug.cleanup({}) 
+
+		map("n", "<leader>rc", function()
+			require("refactoring").debug.cleanup({})
 		end, { desc = "Cleanup Debug Prints" })
 
 		-- Refactoring with Telescope
 		if config.features.telescope then
 			map({ "n", "x" }, "<leader>rr", function()
-				require('telescope').extensions.refactoring.refactors()
+				require("telescope").extensions.refactoring.refactors()
 			end, { desc = "Refactor Menu" })
 		end
 
@@ -214,36 +214,66 @@ function M.setup(user_keymaps)
 
 	-- DAP - Debug Adapter Protocol
 	-- Breakpoints
-	map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
-	map("n", "<leader>dB", function() 
+	map("n", "<leader>db", function()
+		require("dap").toggle_breakpoint()
+	end, { desc = "Toggle Breakpoint" })
+	map("n", "<leader>dB", function()
 		require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 	end, { desc = "Conditional Breakpoint" })
-	map("n", "<leader>dl", function() 
+	map("n", "<leader>dl", function()
 		require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 	end, { desc = "Log Point" })
 
 	-- Debug Control
-	map("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue" })
-	map("n", "<leader>ds", function() require("dap").step_over() end, { desc = "Step Over" })
-	map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Step Into" })
-	map("n", "<leader>do", function() require("dap").step_out() end, { desc = "Step Out" })
-	map("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Terminate Debug" })
+	map("n", "<leader>dc", function()
+		require("dap").continue()
+	end, { desc = "Continue" })
+	map("n", "<leader>ds", function()
+		require("dap").step_over()
+	end, { desc = "Step Over" })
+	map("n", "<leader>di", function()
+		require("dap").step_into()
+	end, { desc = "Step Into" })
+	map("n", "<leader>do", function()
+		require("dap").step_out()
+	end, { desc = "Step Out" })
+	map("n", "<leader>dt", function()
+		require("dap").terminate()
+	end, { desc = "Terminate Debug" })
 
 	-- Debug UI
-	map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "Toggle Debug UI" })
-	map("n", "<leader>de", function() require("dapui").eval() end, { desc = "Evaluate Expression" })
-	map("v", "<leader>de", function() require("dapui").eval() end, { desc = "Evaluate Selection" })
+	map("n", "<leader>du", function()
+		require("dapui").toggle()
+	end, { desc = "Toggle Debug UI" })
+	map("n", "<leader>de", function()
+		require("dapui").eval()
+	end, { desc = "Evaluate Expression" })
+	map("v", "<leader>de", function()
+		require("dapui").eval()
+	end, { desc = "Evaluate Selection" })
 
 	-- Debug Sessions
-	map("n", "<leader>dr", function() require("dap").repl.open() end, { desc = "Open REPL" })
-	map("n", "<leader>dR", function() require("dap").run_last() end, { desc = "Run Last Debug" })
+	map("n", "<leader>dr", function()
+		require("dap").repl.open()
+	end, { desc = "Open REPL" })
+	map("n", "<leader>dR", function()
+		require("dap").run_last()
+	end, { desc = "Run Last Debug" })
 
 	-- Telescope DAP (if telescope is enabled)
 	if config.features.telescope then
-		map("n", "<leader>dC", function() require("telescope").extensions.dap.commands() end, { desc = "DAP Commands" })
-		map("n", "<leader>dv", function() require("telescope").extensions.dap.variables() end, { desc = "DAP Variables" })
-		map("n", "<leader>df", function() require("telescope").extensions.dap.frames() end, { desc = "DAP Frames" })
-		map("n", "<leader>dL", function() require("telescope").extensions.dap.list_breakpoints() end, { desc = "List Breakpoints" })
+		map("n", "<leader>dC", function()
+			require("telescope").extensions.dap.commands()
+		end, { desc = "DAP Commands" })
+		map("n", "<leader>dv", function()
+			require("telescope").extensions.dap.variables()
+		end, { desc = "DAP Variables" })
+		map("n", "<leader>df", function()
+			require("telescope").extensions.dap.frames()
+		end, { desc = "DAP Frames" })
+		map("n", "<leader>dL", function()
+			require("telescope").extensions.dap.list_breakpoints()
+		end, { desc = "List Breakpoints" })
 	end
 
 	-- Which-key helper

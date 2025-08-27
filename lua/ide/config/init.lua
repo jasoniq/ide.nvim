@@ -9,6 +9,7 @@ local options
 
 ---@param opts? IDEConfig
 function M.setup(opts)
+	-- Merge with defaults immediately - this makes config available for plugins
 	options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
 
 	-- Colorscheme loading
@@ -29,7 +30,6 @@ setmetatable(M, {
 		if options == nil then
 			return vim.deepcopy(defaults)[key]
 		end
-		---@cast options[key]
 		return options[key]
 	end,
 })

@@ -1,7 +1,7 @@
+-- Only return the plugin if lsp feature is enabled (default to true if config not available yet)
 local config = require("ide.config")
-
--- Only return the plugin if lsp feature is enabled
-if not config.features.lsp then
+local features = config.features or {}
+if features.lsp == false then
 	return {}
 end
 
@@ -22,17 +22,11 @@ return {
 			},
 		},
 	},
-	config = function()
+	opts = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
-		-- Load friendly-snippets
-		require("luasnip.loaders.from_vscode").lazy_load()
-
-		-- Get user configuration
-		local user_config = config.plugins.cmp or {}
-
-		local default_config = {
+		return {
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -123,9 +117,14 @@ return {
 				end,
 			},
 		}
+	end,
+	config = function(_, opts)
+		local cmp = require("cmp")
 
-		local final_config = vim.tbl_deep_extend("force", default_config, user_config)
-		cmp.setup(final_config)
+		-- Load friendly-snippets
+		require("luasnip.loaders.from_vscode").lazy_load()
+
+		cmp.setup(opts)
 
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore)
 		cmp.setup.cmdline({ "/", "?" }, {

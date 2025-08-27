@@ -10,9 +10,9 @@ return {
 			config = function()
 				require("mason-nvim-dap").setup({
 					ensure_installed = {
-						"python",    -- Python debugger
-						"node2",     -- Node.js/JavaScript debugger
-						"delve",     -- Go debugger
+						"python", -- Python debugger
+						"node2", -- Node.js/JavaScript debugger
+						"delve", -- Go debugger
 					},
 					automatic_installation = true,
 					handlers = {
@@ -118,7 +118,8 @@ return {
 			"nvim-telescope/telescope-dap.nvim",
 			config = function()
 				local config = require("ide.config")
-				if config.features.telescope then
+				local features = config.features or {}
+				if features.telescope ~= false then
 					require("telescope").load_extension("dap")
 				end
 			end,

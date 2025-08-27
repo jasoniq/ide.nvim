@@ -3,6 +3,9 @@
 ---@field which_key? boolean
 ---@field treesitter? boolean
 ---@field lsp? boolean
+---@field lualine? boolean
+---@field refactoring? boolean
+---@field dap? boolean
 
 ---@class IDEVimOptions
 ---@field expandtab? boolean
@@ -26,5 +29,4 @@
 ---@field colorscheme? string|fun()
 ---@field options? IDEVimOptions
 ---@field keymaps? table
----@field plugins? table<string, table>
 ---@field features? IDEFeatures
