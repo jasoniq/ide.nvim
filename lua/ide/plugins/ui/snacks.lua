@@ -7,7 +7,10 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true, example = "advanced" },
     explorer = { enabled = true },
-    picker = { enabled = true },
+    picker = { 
+      enabled = true,
+      hidden = true, -- Show hidden files by default
+    },
 
     -- Tier 1 - Essential IDE Features
     notifier = { enabled = true }, -- Better vim.notify with modern UI
