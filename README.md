@@ -4,16 +4,16 @@ A modern, comprehensive IDE configuration for Neovim built on minimal philosophy
 
 ## 🎯 Philosophy
 
-**Editor-Centric Development Experience**
+**Zero-Configuration IDE Experience**
 
-A truly productive IDE should maximize coding focus while minimizing visual noise. This configuration delivers professional-grade development capabilities through carefully curated plugins that integrate seamlessly, staying out of your way until needed.
+A truly productive IDE should work immediately without complex setup. This configuration delivers professional-grade development capabilities through carefully curated plugins that auto-configure themselves, staying out of your way while providing enterprise features.
 
 **Key Principles:**
-- **Minimal by default**: Only essential features enabled, others configurable
+- **Zero setup required**: Everything works out of the box
 - **Professional grade**: Enterprise debugging, refactoring, and language support
-- **Telescope-centric**: Use fuzzy finding over visual clutter
-- **Mason-managed**: Automatic tool installation and updates
-- **Cohesive integration**: All tools work together harmoniously
+- **Finder-centric**: Use fuzzy finding over visual clutter
+- **Auto-managed**: Mason handles tool installation automatically
+- **Native customization**: Pure lazy.nvim patterns, no custom config system
 
 ## ⚡ Quick Start
 
@@ -29,9 +29,7 @@ Add to your LazyVim plugins:
 {
   "jasoniq/ide.nvim",
   import = "ide.plugins",
-  config = function()
-    require("ide.config").setup()
-  end
+  -- That's it! Auto-loads vim options, keymaps, and colorscheme
 }
 ```
 
@@ -202,66 +200,49 @@ Add to your LazyVim plugins:
 
 ## 🛠️ Configuration
 
-### Basic Setup
-```lua
-{
-  "jasoniq/ide.nvim",
-  import = "ide.plugins", 
-  config = function()
-    require("ide.config").setup()  -- Uses all defaults
-  end
-}
-```
+### Installation & Setup
+Zero configuration required - just add and go:
 
-### Advanced Configuration
 ```lua
 {
   "jasoniq/ide.nvim",
   import = "ide.plugins",
-  config = function()
-    require("ide.config").setup({
-      -- Feature toggles
-      features = {
-        telescope = true,     -- Fuzzy finder
-        which_key = true,     -- Keymap helper  
-        treesitter = true,    -- Syntax highlighting
-        lsp = true,          -- Language servers
-      },
-      
-      -- Colorscheme
-      colorscheme = "catppuccin", -- or function() return "gruvbox" end
-      
-      -- Plugin-specific configs
-      plugins = {
-        catppuccin = { flavour = "mocha" },
-        treesitter = {
-          ensure_installed = { "lua", "python", "javascript", "typescript" }
-        },
-        telescope = {
-          defaults = { layout_strategy = "horizontal" }
-        },
-        mason = {
-          ensure_installed = { "lua_ls", "pyright", "tsserver" }
-        }
-      },
-      
-      -- Custom vim options
-      options = {
-        shiftwidth = 4,
-        tabstop = 4,
-        number = true,
-        relativenumber = true,
-      },
-      
-      -- Additional keymaps
-      keymaps = {
-        n = {
-          ["<leader>gg"] = { "<cmd>LazyGit<CR>", { desc = "Open LazyGit" } }
-        }
-      }
-    })
-  end
+  -- That's it! Auto-loads all features with sensible defaults
 }
+```
+
+### Customization (Optional)
+Override any plugin using lazy.nvim's standard pattern:
+
+```lua
+{
+  "jasoniq/ide.nvim",
+  import = "ide.plugins",
+},
+
+-- Light theme
+{
+  "catppuccin/nvim",
+  opts = {
+    flavour = "latte",
+  },
+},
+
+-- Add language servers
+{
+  "williamboman/mason.nvim",
+  opts = {
+    ensure_installed = { "lua_ls", "pyright", "tsserver" },
+  },
+},
+
+-- Add language parsers
+{
+  "nvim-treesitter/nvim-treesitter",
+  opts = {
+    ensure_installed = { "lua", "python", "javascript", "typescript" },
+  },
+},
 ```
 
 ## 📦 Included Plugins
@@ -311,29 +292,45 @@ Out-of-the-box support for:
 Languages are added automatically via Mason. To ensure specific ones are installed:
 
 ```lua
-plugins = {
-  mason = {
+-- Override Mason configuration
+{
+  "williamboman/mason.nvim",
+  opts = {
     ensure_installed = { "lua_ls", "pyright", "tsserver", "gopls" }
   },
-  treesitter = {
+},
+
+-- Override Treesitter configuration  
+{
+  "nvim-treesitter/nvim-treesitter",
+  opts = {
     ensure_installed = { "lua", "python", "javascript", "go" }
-  }
-}
+  },
+},
 ```
 
 ### Custom Themes
 ```lua
--- Static theme
-colorscheme = "gruvbox"
+-- Light catppuccin variant
+{
+  "catppuccin/nvim",
+  opts = {
+    flavour = "latte",
+  },
+},
 
--- Dynamic theme  
-colorscheme = function() 
-  return vim.fn.input("Colorscheme: ", "catppuccin")
-end
+-- Or completely different theme
+{
+  "folke/tokyonight.nvim",
+  priority = 1000,
+  config = function()
+    vim.cmd("colorscheme tokyonight")
+  end,
+},
 ```
 
 ### Plugin Customization
-Each plugin can be configured via the `plugins` table. See plugin documentation for available options.
+Every plugin can be customized using lazy.nvim's standard `opts` table. See individual plugin documentation for available options.
 
 ## 🔧 Advanced Features
 

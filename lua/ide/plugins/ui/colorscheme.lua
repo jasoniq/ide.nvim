@@ -25,4 +25,9 @@ return {
       treesitter = true,
     },
   },
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
+    -- Set as default colorscheme
+    vim.cmd.colorscheme("catppuccin")
+  end,
 }

@@ -18,8 +18,20 @@ This is a Neovim plugin collection called `ide.nvim` that provides IDE functiona
 {
   "jasoniq/ide.nvim",
   import = "ide.plugins",
+  -- That's it! Auto-loads vim options, keymaps, and colorscheme
+}
+```
+
+### Advanced Configuration (Optional)
+```lua
+{
+  "jasoniq/ide.nvim",
+  import = "ide.plugins",
   config = function()
-    require("ide.config").setup()
+    -- Optional: Override colorscheme or add custom options
+    require("ide.config").setup({
+      colorscheme = "your-theme",
+    })
   end
 }
 ```

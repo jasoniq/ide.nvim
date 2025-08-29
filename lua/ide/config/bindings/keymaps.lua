@@ -1,7 +1,6 @@
 local M = {}
 
----@param user_keymaps? table
-function M.setup(user_keymaps)
+function M.setup()
   local config = require("ide.config")
   local map = vim.keymap.set
 
@@ -281,18 +280,8 @@ function M.setup(user_keymaps)
     map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Show All Keymaps" })
   end
 
-  -- Apply user-defined keymaps
-  if user_keymaps then
-    for mode, mappings in pairs(user_keymaps) do
-      for key, mapping in pairs(mappings) do
-        if type(mapping) == "table" then
-          map(mode, key, mapping[1], mapping[2] or {})
-        else
-          map(mode, key, mapping)
-        end
-      end
-    end
-  end
+  -- All keymaps are now loaded automatically
+  -- Users can override with vim.keymap.set() in their config or via lazy.nvim
 end
 
 return M

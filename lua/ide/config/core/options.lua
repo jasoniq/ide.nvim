@@ -1,13 +1,9 @@
 local M = {}
 
----@param user_options? table<string, any>
-function M.setup(user_options)
+function M.setup()
   local opt = vim.opt
   local o = vim.o
   local g = vim.g
-
-  -------------------------------------- Fixed IDE Options ------------------------------------------
-  -- These options are essential for IDE functionality and cannot be changed
 
   -- IDE Performance & Integration
   o.laststatus = 3 -- Global statusline for modern IDE experience
@@ -33,60 +29,25 @@ function M.setup(user_options)
   local delim = is_windows and ";" or ":"
   vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
-  -------------------------------------- Configurable Options ------------------------------------------
-  -- User preferences that can be customized via config
-
-  -- Default user-configurable options
-  local configurable_defaults = {
-    -- Indentation preferences
-    expandtab = true,
-    shiftwidth = 2,
-    tabstop = 2,
-    softtabstop = 2,
-    smartindent = true,
-
-    -- Search behavior
-    ignorecase = true,
-    smartcase = true,
-
-    -- Display preferences
-    cursorline = true,
-    cursorlineopt = "number",
-    number = true,
-    numberwidth = 2,
-
-    -- System integration
-    clipboard = "unnamedplus",
-    mouse = "a",
-
-    -- Timing
-    timeoutlen = 400,
-
-    -- Visual tweaks
-    fillchars = { eob = " " },
-    whichwrap = "<>[]hl",
-  }
-
-  -- Merge user options with defaults
-  local final_options = vim.tbl_deep_extend("force", configurable_defaults, user_options or {})
-
-  -- Apply configurable options
-  for option, value in pairs(final_options) do
-    if option == "fillchars" or option == "whichwrap" then
-      -- Special handling for opt-style options
-      if option == "fillchars" then
-        opt.fillchars = value
-      elseif option == "whichwrap" then
-        opt.whichwrap = value
-      end
-    else
-      -- Standard vim options
-      o[option] = value
-    end
-  end
-
-  -- Always set ruler to false (part of modern IDE experience)
+  -- Sensible defaults
+  o.expandtab = true
+  o.shiftwidth = 2
+  o.tabstop = 2
+  o.softtabstop = 2
+  o.smartindent = true
+  o.ignorecase = true
+  o.smartcase = true
+  o.cursorline = true
+  o.cursorlineopt = "number"
+  o.number = true
+  o.numberwidth = 2
+  o.clipboard = "unnamedplus"
+  o.mouse = "a"
+  o.timeoutlen = 400
   o.ruler = false
+
+  opt.fillchars = { eob = " " }
+  opt.whichwrap = "<>[]hl"
 end
 
 return M

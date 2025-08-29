@@ -7,7 +7,7 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true, example = "advanced" },
     explorer = { enabled = true },
-    picker = { 
+    picker = {
       enabled = true,
       hidden = true, -- Show hidden files by default
     },

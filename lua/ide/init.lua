@@ -2,9 +2,11 @@ vim.uv = vim.uv or vim.loop
 
 local M = {}
 
----@param opts? IDEConfig
-function M.setup(opts)
-  require("ide.config").setup(opts)
+-- LazyVim compatibility - provide a default config function
+function M.config()
+  -- Auto-load essential IDE configuration
+  require("ide.config.core.options").setup()
+  require("ide.config.bindings.keymaps").setup()
 end
 
 return M

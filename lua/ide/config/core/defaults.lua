@@ -2,8 +2,6 @@
 local defaults = {
   ---@type string|fun()
   colorscheme = "catppuccin",
-  options = {},
-  keymaps = {},
   features = {
     finder = true,
     keybind_help = true,
