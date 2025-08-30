@@ -113,15 +113,11 @@ return {
       end,
     },
 
-    -- Telescope integration (if finder is enabled)
+    -- Telescope integration (always load since debugging is conditional on finder)
     {
       "nvim-telescope/telescope-dap.nvim",
       config = function()
-        local config = require("ide.config")
-        local features = config.features or {}
-        if features.finder ~= false then
-          require("telescope").load_extension("dap")
-        end
+        pcall(require("telescope").load_extension, "dap")
       end,
     },
   },

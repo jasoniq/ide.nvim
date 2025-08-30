@@ -31,11 +31,7 @@ return {
   config = function(_, opts)
     require("refactoring").setup(opts)
 
-    -- Telescope integration if finder is enabled
-    local config = require("ide.config")
-    local features = config.features or {}
-    if features.finder ~= false then
-      require("telescope").load_extension("refactoring")
-    end
+    -- Telescope integration (always load since refactoring is conditional on finder)
+    pcall(require("telescope").load_extension, "refactoring")
   end,
 }

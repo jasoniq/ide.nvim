@@ -7,26 +7,6 @@
 ---@field refactoring? boolean -- Code refactoring tools
 ---@field debugging? boolean -- Debug Adapter Protocol (DAP) support
 
----@class IDEVimOptions
----@field expandtab? boolean
----@field shiftwidth? number
----@field tabstop? number
----@field softtabstop? number
----@field smartindent? boolean
----@field ignorecase? boolean
----@field smartcase? boolean
----@field cursorline? boolean
----@field cursorlineopt? string
----@field number? boolean
----@field numberwidth? number
----@field clipboard? string
----@field mouse? string
----@field timeoutlen? number
----@field fillchars? table
----@field whichwrap? string
-
 ---@class IDEConfig
----@field colorscheme? string|fun()
----@field options? IDEVimOptions
----@field keymaps? table
----@field features? IDEFeatures
+---@field colorscheme? string -- Default colorscheme (catppuccin)
+---@field features? IDEFeatures -- Feature flags for enabling/disabling plugins

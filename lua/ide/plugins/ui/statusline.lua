@@ -1,11 +1,3 @@
-local config = require("ide.config")
-
--- Only load if statusline feature is enabled (default to true if config not available yet)
-local features = config.features or {}
-if features.statusline == false then
-  return {}
-end
-
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },

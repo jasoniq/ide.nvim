@@ -1,10 +1,3 @@
--- Only return the plugin if lsp feature is enabled (default to true if config not available yet)
-local config = require("ide.config")
-local features = config.features or {}
-if features.lsp == false then
-  return {}
-end
-
 return {
   -- Mason for managing LSP servers, linters, formatters
   {
