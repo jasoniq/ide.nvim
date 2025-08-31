@@ -15,10 +15,7 @@ function M.setup()
   map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
   -- Snacks - UI & Project Management (always available)
-  map("n", "<leader>e", function()
-    Snacks.explorer()
-  end, { desc = "File Explorer" })
-  map("n", "<leader>d", function()
+  map("n", "<leader>D", function()
     Snacks.dashboard()
   end, { desc = "Dashboard" })
 
@@ -121,8 +118,6 @@ function M.setup()
   -- Quick Actions
   map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
   map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
-  map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
-  map("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All" })
 
   -- LSP - Language Server Protocol
   if config.features.lsp then
@@ -208,7 +203,7 @@ function M.setup()
 
     -- Mason LSP Management
     map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason LSP Manager" })
-    map("n", "<leader>cR", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
+    map("n", "<leader>cL", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
   end
 
   -- DAP - Debug Adapter Protocol

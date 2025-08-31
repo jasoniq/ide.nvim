@@ -6,11 +6,8 @@ return {
     -- Essential features (always enabled)
     bigfile = { enabled = true },
     dashboard = { enabled = true, example = "advanced" },
-    explorer = { enabled = true },
-    picker = {
-      enabled = true,
-      hidden = true, -- Show hidden files by default
-    },
+    explorer = { enabled = false },
+    picker = { enabled = false },
 
     -- Tier 1 - Essential IDE Features
     notifier = { enabled = true }, -- Better vim.notify with modern UI

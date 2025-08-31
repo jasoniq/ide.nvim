@@ -21,6 +21,32 @@ A truly productive IDE should work immediately without complex setup. This confi
 - Neovim 0.10+
 - [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
 
+### CLI Dependencies
+For optimal functionality, install these command-line tools:
+
+**Essential:**
+- `ripgrep` (rg) - Fast file and text searching
+- `fd` (optional) - Alternative file finder for telescope
+
+**Git Integration:**
+- `lazygit` - Terminal UI for git operations
+
+**Installation:**
+```bash
+# macOS
+brew install ripgrep fd lazygit
+
+# Ubuntu/Debian
+sudo apt install ripgrep fd-find
+sudo snap install lazygit
+
+# Arch Linux
+sudo pacman -S ripgrep fd lazygit
+
+# Windows (chocolatey)
+choco install ripgrep fd lazygit
+```
+
 ### Installation
 
 Add to your LazyVim plugins:
@@ -40,11 +66,12 @@ Add to your LazyVim plugins:
 - **Configuration**: Centralized config system with user customization
 - **UI**: Catppuccin theme + Lualine statusline + smooth animations
 
-### 🔍 Navigation & Search
-- **Telescope**: Fuzzy finding for files, text, buffers, and more
-- **Snacks Explorer**: Modern file browser with project navigation
+### 🔍 Navigation & Search (Finder-Centric)
+- **Telescope**: Advanced fuzzy finding for files (including hidden), text, buffers, and more
+- **Ripgrep Integration**: Lightning-fast file and text searching with smart filtering
 - **Smart Scope**: Treesitter-based semantic code navigation
 - **Which-Key**: Interactive keymap discovery
+- **Project Navigation**: Recent files, git files, and project-aware file discovery
 
 ### 💻 Language Support
 - **LSP**: Full Language Server Protocol with Mason management
@@ -74,16 +101,15 @@ Add to your LazyVim plugins:
 ## 📖 Complete Keymap Reference
 
 ### Core Navigation
-- `<leader>e` - File Explorer
-- `<leader>d` - Dashboard
+- `<leader>D` - Dashboard
 - `<Esc>` - Clear search highlights  
 - `<C-s>` - Save file
 
 ### 🔍 Telescope - Find & Search (`<leader>f`)
-- `<leader>ff` - Find Files
+- `<leader>ff` - Find Files (includes hidden files like .env, .gitignore)
 - `<leader>fr` - Recent Files  
 - `<leader>fg` - Git Files
-- `<leader>fw` - Find Word (live grep)
+- `<leader>fw` - Find Word (live grep in all files including hidden)
 - `<leader>fc` - Find Word under Cursor
 - `<leader>fb` - Find Buffers
 - `<leader>ft` - Find Text in Buffer
@@ -163,7 +189,8 @@ Add to your LazyVim plugins:
 
 **Management:**
 - `<leader>cm` - Mason LSP Manager
-- `<leader>cR` - Restart LSP (or Rename File - Smart)
+- `<leader>cL` - Restart LSP
+- `<leader>cR` - Rename File (Smart)
 
 ### Buffer Management (`<leader>b`)
 - `<leader>bd` - Delete Buffer (Smart)
@@ -192,8 +219,6 @@ Add to your LazyVim plugins:
 ### Quick Actions
 - `<leader>q` - Quit
 - `<leader>Q` - Quit All
-- `<leader>w` - Save
-- `<leader>W` - Save All
 - `<leader>/` - Toggle Comment
 - `K` - Hover Documentation
 - `[d` / `]d` - Previous/Next Diagnostic

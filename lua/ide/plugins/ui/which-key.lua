@@ -34,7 +34,7 @@ return {
       { "<leader>cd", desc = "Show Line Diagnostics" },
       { "<leader>cq", desc = "Diagnostics to Location List" },
       { "<leader>cm", desc = "Mason LSP Manager" },
-      { "<leader>cR", desc = "Restart LSP" },
+      { "<leader>cL", desc = "Restart LSP" },
 
       -- Refactoring group (<leader>r)
       { "<leader>r", group = "Refactor", icon = "🔧" },
