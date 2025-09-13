@@ -26,7 +26,7 @@ return {
     },
     printf_statements = {},
     print_var_statements = {},
-    show_success_message = false,
+    show_success_message = true,
   },
   config = function(_, opts)
     require("refactoring").setup(opts)

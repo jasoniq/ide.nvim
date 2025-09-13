@@ -26,9 +26,8 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim" },
     opts = {
-      -- Install servers but don't auto-configure them (we handle configuration manually)
-      automatic_installation = false,
-      automatic_enable = false, -- Disable auto-setup, we'll configure manually
+      -- Enable automatic installation and setup for better user experience
+      automatic_installation = true,
       ensure_installed = {
         "lua_ls", -- Include lua_ls for Neovim config development
       },

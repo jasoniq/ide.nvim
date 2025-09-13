@@ -78,7 +78,8 @@ return {
     -- lua_ls with our enhanced Neovim configuration
     lspconfig.lua_ls.setup(vim.tbl_deep_extend("force", default_lsp_config, default_server_configs.lua_ls or {}))
 
-    -- Other servers will use mason's automatic setup with our defaults applied via lspconfig's default_config
+    -- Mason-lspconfig will automatically set up installed servers
+    -- Since automatic_installation = true, mason will handle server setup with lspconfig defaults
 
     -- Configure diagnostics
     vim.diagnostic.config({
