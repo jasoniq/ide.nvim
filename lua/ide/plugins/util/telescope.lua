@@ -10,11 +10,11 @@ return {
     local actions = require("telescope.actions")
     return {
       defaults = {
-        path_display = { "smart" },
-        file_ignore_patterns = { 
-          "node_modules/", 
-          "build/", 
-          "dist/", 
+        path_display = { "truncate" },
+        file_ignore_patterns = {
+          "node_modules/",
+          "build/",
+          "dist/",
           ".git/",
           "*.pyc",
           "__pycache__/",
@@ -29,8 +29,8 @@ return {
       },
       pickers = {
         find_files = {
-          hidden = true,
           find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+          follow = true,
         },
         live_grep = {
           additional_args = function()
