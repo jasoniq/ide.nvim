@@ -18,7 +18,7 @@ A truly productive IDE should work immediately without complex setup. This confi
 ## ⚡ Quick Start
 
 ### Requirements
-- Neovim 0.10+
+- Neovim 0.11.3+
 - [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
 
 ### CLI Dependencies
@@ -255,9 +255,9 @@ Override any plugin using lazy.nvim's standard pattern:
 
 -- Add language servers
 {
-  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
   opts = {
-    ensure_installed = { "lua_ls", "pyright", "tsserver" },
+    ensure_installed = { "lua_ls", "pyright", "ts_ls" },
   },
 },
 
@@ -317,11 +317,11 @@ Out-of-the-box support for:
 Languages are added automatically via Mason. To ensure specific ones are installed:
 
 ```lua
--- Override Mason configuration
+-- Override Mason LSP configuration
 {
-  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
   opts = {
-    ensure_installed = { "lua_ls", "pyright", "tsserver", "gopls" }
+    ensure_installed = { "lua_ls", "pyright", "ts_ls", "gopls" }
   },
 },
 
@@ -333,6 +333,8 @@ Languages are added automatically via Mason. To ensure specific ones are install
   },
 },
 ```
+
+If you previously used `tsserver`, rename it to `ts_ls` in your local overrides.
 
 ### Custom Themes
 ```lua

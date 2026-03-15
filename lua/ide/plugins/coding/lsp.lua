@@ -7,14 +7,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    -- LSP configuration is now handled via lazy.nvim overrides
-
-    local lspconfig = require("lspconfig")
-    local mason_lspconfig = require("mason-lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-    -- Configure LSP UI with borders (modern approach)
-    require("lspconfig.ui.windows").default_options.border = "rounded"
 
     -- Enhanced capabilities with completion support
     local capabilities =
@@ -62,24 +55,25 @@ return {
     }
 
     -- On attach function for LSP servers
-    local function on_attach(client, bufnr)
+    local function on_attach(_, bufnr)
       -- Enable completion triggered by <c-x><c-o>
       vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
     end
 
-    -- Configure default settings for all LSP servers
-    -- Mason will automatically start installed servers, and they'll use these defaults
+    -- Configure shared defaults for all LSP servers
     local default_lsp_config = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
 
-    -- Set up specific server configurations
-    -- lua_ls with our enhanced Neovim configuration
-    lspconfig.lua_ls.setup(vim.tbl_deep_extend("force", default_lsp_config, default_server_configs.lua_ls or {}))
+    -- Apply defaults and server-specific overrides using native Nvim 0.11 LSP APIs.
+    vim.lsp.config("*", default_lsp_config)
+    vim.lsp.config("lua_ls", default_server_configs.lua_ls or {})
 
-    -- Mason-lspconfig will automatically set up installed servers
-    -- Since automatic_installation = true, mason will handle server setup with lspconfig defaults
+    local border = "rounded"
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+      vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 
     -- Configure diagnostics
     vim.diagnostic.config({

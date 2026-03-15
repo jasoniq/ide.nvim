@@ -5,12 +5,7 @@ return {
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
-    opts_extend = { "ensure_installed" },
     opts = {
-      ensure_installed = {
-        -- Language servers will be installed based on user preference
-        -- No servers installed by default to keep minimal
-      },
       ui = {
         icons = {
           package_installed = "✓",
@@ -26,8 +21,8 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim" },
     opts = {
-      -- Enable automatic installation and setup for better user experience
-      automatic_installation = true,
+      -- Automatically enable installed servers via vim.lsp.enable().
+      automatic_enable = true,
       ensure_installed = {
         "lua_ls", -- Include lua_ls for Neovim config development
       },
