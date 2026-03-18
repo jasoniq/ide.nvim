@@ -107,6 +107,8 @@ Add to your LazyVim plugins:
 
 ### 🔍 Telescope - Find & Search (`<leader>f`)
 - `<leader>ff` - Find Files (includes hidden files like .env, .gitignore)
+- `<leader>fd` - File Browser (current file directory)
+- `<leader>fD` - File Browser (project root)
 - `<leader>fr` - Recent Files  
 - `<leader>fg` - Git Files
 - `<leader>fw` - Find Word (live grep in all files including hidden)

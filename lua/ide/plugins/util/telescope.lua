@@ -4,13 +4,26 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-telescope/telescope-file-browser.nvim",
     "nvim-tree/nvim-web-devicons",
   },
   opts = function()
     local actions = require("telescope.actions")
     return {
       defaults = {
-        path_display = { "truncate" },
+        path_display = { "filename_first", "truncate" },
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          width = 0.95,
+          height = 0.9,
+          preview_cutoff = 120,
+          prompt_position = "top",
+          horizontal = {
+            preview_width = 0.55,
+            results_width = 0.8,
+          },
+        },
         file_ignore_patterns = {
           "node_modules/",
           "build/",
@@ -38,10 +51,18 @@ return {
           end,
         },
       },
+      extensions = {
+        file_browser = {
+          hidden = true,
+          grouped = true,
+          respect_gitignore = false,
+        },
+      },
     }
   end,
   config = function(_, opts)
     require("telescope").setup(opts)
     require("telescope").load_extension("fzf")
+    require("telescope").load_extension("file_browser")
   end,
 }

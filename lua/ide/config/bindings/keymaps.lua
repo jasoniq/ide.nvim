@@ -74,8 +74,33 @@ function M.setup()
 
   -- Telescope - Find & Search
   if config.features.finder then
+    local function open_file_browser(opts)
+      require("telescope").extensions.file_browser.file_browser(opts)
+    end
+
+    local function cwd_path()
+      return (vim.uv or vim.loop).cwd()
+    end
+
     -- Files
     map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+    map("n", "<leader>fd", function()
+      local dir = vim.fn.expand("%:p:h")
+      if dir == "" then
+        dir = cwd_path()
+      end
+      open_file_browser({
+        path = dir,
+        cwd = dir,
+      })
+    end, { desc = "File Browser (Current Dir)" })
+    map("n", "<leader>fD", function()
+      local root = cwd_path()
+      open_file_browser({
+        path = root,
+        cwd = root,
+      })
+    end, { desc = "File Browser (Project Root)" })
     map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
     map("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = "Git Files" })
 
