@@ -164,7 +164,26 @@ function M.setup()
     map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format Document" })
     map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format Selection" })
 
-    -- Refactoring Operations
+    -- Diagnostics
+    map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })
+    map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+    map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+    map("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Diagnostics to Location List" })
+
+    -- Workspace
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
+    map("n", "<leader>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { desc = "List Workspace Folders" })
+
+    -- Mason LSP Management
+    map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason LSP Manager" })
+    map("n", "<leader>cL", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
+  end
+
+  -- Refactoring Operations
+  if config.features.refactoring then
     map({ "n", "x" }, "<leader>re", function()
       return require("refactoring").refactor("Extract Function")
     end, { expr = true, desc = "Extract Function" })
@@ -212,87 +231,72 @@ function M.setup()
         require("telescope").extensions.refactoring.refactors()
       end, { desc = "Refactor Menu" })
     end
-
-    -- Diagnostics
-    map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })
-    map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
-    map("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
-    map("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Diagnostics to Location List" })
-
-    -- Workspace
-    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
-    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
-    map("n", "<leader>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { desc = "List Workspace Folders" })
-
-    -- Mason LSP Management
-    map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason LSP Manager" })
-    map("n", "<leader>cL", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
   end
 
   -- DAP - Debug Adapter Protocol
-  -- Breakpoints
-  map("n", "<leader>db", function()
-    require("dap").toggle_breakpoint()
-  end, { desc = "Toggle Breakpoint" })
-  map("n", "<leader>dB", function()
-    require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-  end, { desc = "Conditional Breakpoint" })
-  map("n", "<leader>dl", function()
-    require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-  end, { desc = "Log Point" })
+  if config.features.debugging then
+    -- Breakpoints
+    map("n", "<leader>db", function()
+      require("dap").toggle_breakpoint()
+    end, { desc = "Toggle Breakpoint" })
+    map("n", "<leader>dB", function()
+      require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end, { desc = "Conditional Breakpoint" })
+    map("n", "<leader>dl", function()
+      require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+    end, { desc = "Log Point" })
 
-  -- Debug Control
-  map("n", "<leader>dc", function()
-    require("dap").continue()
-  end, { desc = "Continue" })
-  map("n", "<leader>ds", function()
-    require("dap").step_over()
-  end, { desc = "Step Over" })
-  map("n", "<leader>di", function()
-    require("dap").step_into()
-  end, { desc = "Step Into" })
-  map("n", "<leader>do", function()
-    require("dap").step_out()
-  end, { desc = "Step Out" })
-  map("n", "<leader>dt", function()
-    require("dap").terminate()
-  end, { desc = "Terminate Debug" })
+    -- Debug Control
+    map("n", "<leader>dc", function()
+      require("dap").continue()
+    end, { desc = "Continue" })
+    map("n", "<leader>ds", function()
+      require("dap").step_over()
+    end, { desc = "Step Over" })
+    map("n", "<leader>di", function()
+      require("dap").step_into()
+    end, { desc = "Step Into" })
+    map("n", "<leader>do", function()
+      require("dap").step_out()
+    end, { desc = "Step Out" })
+    map("n", "<leader>dt", function()
+      require("dap").terminate()
+    end, { desc = "Terminate Debug" })
 
-  -- Debug UI
-  map("n", "<leader>du", function()
-    require("dapui").toggle()
-  end, { desc = "Toggle Debug UI" })
-  map("n", "<leader>de", function()
-    require("dapui").eval()
-  end, { desc = "Evaluate Expression" })
-  map("v", "<leader>de", function()
-    require("dapui").eval()
-  end, { desc = "Evaluate Selection" })
+    -- Debug UI
+    map("n", "<leader>du", function()
+      require("dapui").toggle()
+    end, { desc = "Toggle Debug UI" })
+    map("n", "<leader>de", function()
+      require("dapui").eval()
+    end, { desc = "Evaluate Expression" })
+    map("v", "<leader>de", function()
+      require("dapui").eval()
+    end, { desc = "Evaluate Selection" })
 
-  -- Debug Sessions
-  map("n", "<leader>dr", function()
-    require("dap").repl.open()
-  end, { desc = "Open REPL" })
-  map("n", "<leader>dR", function()
-    require("dap").run_last()
-  end, { desc = "Run Last Debug" })
+    -- Debug Sessions
+    map("n", "<leader>dr", function()
+      require("dap").repl.open()
+    end, { desc = "Open REPL" })
+    map("n", "<leader>dR", function()
+      require("dap").run_last()
+    end, { desc = "Run Last Debug" })
 
-  -- Telescope DAP (if finder is enabled)
-  if config.features.finder then
-    map("n", "<leader>dC", function()
-      require("telescope").extensions.dap.commands()
-    end, { desc = "DAP Commands" })
-    map("n", "<leader>dv", function()
-      require("telescope").extensions.dap.variables()
-    end, { desc = "DAP Variables" })
-    map("n", "<leader>df", function()
-      require("telescope").extensions.dap.frames()
-    end, { desc = "DAP Frames" })
-    map("n", "<leader>dL", function()
-      require("telescope").extensions.dap.list_breakpoints()
-    end, { desc = "List Breakpoints" })
+    -- Telescope DAP (if finder is enabled)
+    if config.features.finder then
+      map("n", "<leader>dC", function()
+        require("telescope").extensions.dap.commands()
+      end, { desc = "DAP Commands" })
+      map("n", "<leader>dv", function()
+        require("telescope").extensions.dap.variables()
+      end, { desc = "DAP Variables" })
+      map("n", "<leader>df", function()
+        require("telescope").extensions.dap.frames()
+      end, { desc = "DAP Frames" })
+      map("n", "<leader>dL", function()
+        require("telescope").extensions.dap.list_breakpoints()
+      end, { desc = "List Breakpoints" })
+    end
   end
 
   -- Which-key helper

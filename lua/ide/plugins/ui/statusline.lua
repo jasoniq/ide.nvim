@@ -25,7 +25,7 @@ return {
           },
         },
       },
-      lualine_x = { 
+      lualine_x = {
         {
           -- LSP server status
           function()
@@ -33,19 +33,19 @@ return {
             if #clients == 0 then
               return ""
             end
-            
+
             local names = {}
             for _, client in ipairs(clients) do
               table.insert(names, client.name)
             end
-            
+
             return " " .. table.concat(names, ", ")
           end,
           color = { fg = "#98be65" }, -- Green color for active LSP
         },
-        "encoding", 
-        "fileformat", 
-        "filetype" 
+        "encoding",
+        "fileformat",
+        "filetype",
       },
       lualine_y = { "progress" },
       lualine_z = { "location" },
@@ -58,6 +58,6 @@ return {
       lualine_y = {},
       lualine_z = {},
     },
-    extensions = { "lazy", "mason", "trouble" },
+    extensions = { "lazy", "mason" },
   },
 }

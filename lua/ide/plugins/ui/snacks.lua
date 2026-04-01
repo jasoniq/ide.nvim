@@ -21,7 +21,7 @@ return {
 
     -- UI Focus Features
     dim = { enabled = true }, -- Focus on active scope by dimming the rest
-    indent = { enabled = true }, -- Indent guides and scope visualization
+    indent = { enabled = false }, -- TODO: re-enable after snacks.nvim supports Neovim 0.12 treesitter API
     zen = { enabled = true }, -- Distraction-free coding mode
     toggle = { enabled = true }, -- Toggle functionality for UI features
 
@@ -30,7 +30,7 @@ return {
     statuscolumn = { enabled = true }, -- Enhanced line numbers and gutter
 
     -- Development Tools
-    scope = { enabled = true }, -- Smart scope detection and text object jumping
+    scope = { enabled = false }, -- TODO: re-enable after snacks.nvim supports Neovim 0.12 treesitter API
     rename = { enabled = true }, -- LSP-integrated file renaming
     scratch = { enabled = true }, -- Temporary/persistent scratch buffers for quick notes
     debug = { enabled = true }, -- Pretty debugging tools and data inspection

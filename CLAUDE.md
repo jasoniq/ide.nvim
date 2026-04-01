@@ -51,20 +51,41 @@ The plugin uses a centralized config system in `lua/ide/config/init.lua`:
 - Deep merges user options with sensible defaults
 
 ### Plugin Architecture
-Each file in `lua/ide/plugins/` returns a LazyVim plugin specification:
-- **core.lua**: Essential dependencies (plenary, vim-tmux-navigator)
-- **snacks.lua**: Folke snacks with explorer, dashboard, and utilities
+Each file in `lua/ide/plugins/` returns a LazyVim plugin specification, organized by domain:
+
+**UI** (`lua/ide/plugins/ui/`):
+- **snacks.lua**: Dashboard, notifications, zen mode, lazygit, bufdelete, animations
 - **colorscheme.lua**: Catppuccin theme configuration
-- **treesitter.lua**: Syntax highlighting with minimal default parsers
-- **telescope.lua**: Fuzzy finder
-- **folke-which-key.lua**: Key binding help
+- **which-key.lua**: Keymap help and discovery
+- **statusline.lua**: Lualine status bar with LSP status
+
+**Editor** (`lua/ide/plugins/editor/`):
+- **treesitter.lua**: Syntax highlighting (no parsers by default)
+- **vim-tmux-navigator.lua**: Seamless tmux/vim split navigation
+
+**Coding** (`lua/ide/plugins/coding/`):
+- **lsp.lua**: LSP configuration with inlay hints enabled
+- **completion.lua**: nvim-cmp completion engine with snippet support
+- **mason.lua**: LSP/DAP package manager
+- **refactoring.lua**: Code refactoring operations (lazy-loaded on keys)
+- **dap.lua**: Debug Adapter Protocol (lazy-loaded on keys/cmd)
+
+**Util** (`lua/ide/plugins/util/`):
+- **telescope.lua**: Fuzzy finder with file browser extension
+
+### Feature Flags
+Plugins are conditionally loaded via feature flags in `lua/ide/config/core/defaults.lua`:
+- `finder`, `keybind_help`, `syntax_highlighting`, `lsp`, `statusline`, `refactoring`, `debugging`
+- All enabled by default; users can disable features to skip loading associated plugins
+- Keymaps in `config/bindings/keymaps.lua` are gated behind the same flags
 
 ### Default Configuration
 - **Indentation**: 2 spaces (expandtab enabled)
-- **Colorscheme**: Catppuccin (configurable)
-- **File Explorer**: Snacks explorer accessible via `<leader>e`
-- **Key mappings**: Defined in `config/keymaps.lua` with descriptive names
+- **Colorscheme**: Catppuccin Mocha (configurable)
+- **Inlay hints**: Enabled via LSP on_attach
+- **Key mappings**: Defined in `config/bindings/keymaps.lua` with descriptive names
 - **Treesitter**: No language parsers installed by default (user must add via `ensure_installed`)
+- **Terminal**: Not included — workflow relies on tmux + vim-tmux-navigator
 
 ## Code Style Guidelines
 

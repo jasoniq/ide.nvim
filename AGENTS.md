@@ -30,9 +30,12 @@ This repository is a Neovim plugin collection written in Lua for LazyVim-style s
 
 ## Repo Conventions
 - Keep keymap changes centralized in `lua/ide/config/bindings/keymaps.lua` with descriptive `desc` values.
+- Keymaps must be gated behind their correct feature flag (e.g., DAP keymaps behind `features.debugging`, refactoring behind `features.refactoring`).
 - Keep core option changes in `lua/ide/config/core/options.lua`.
 - Respect feature flags in `lua/ide/config/core/defaults.lua` when adding conditional plugin behavior.
 - New plugin configuration should follow existing Lazy spec style and domain grouping.
+- Prefer `keys`/`cmd` lazy loading over `event` for user-initiated features (debugging, refactoring).
+- No terminal plugins — tmux + vim-tmux-navigator handles terminal workflow.
 
 ## Additional Notes
 - Plugins are managed via lazy.nvim/LazyVim import patterns.

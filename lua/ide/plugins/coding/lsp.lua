@@ -59,8 +59,8 @@ return {
 
     -- On attach function for LSP servers
     local function on_attach(_, bufnr)
-      -- Enable completion triggered by <c-x><c-o>
       vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
     -- Configure shared defaults for all LSP servers
@@ -76,8 +76,7 @@ return {
 
     local border = "rounded"
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 
     -- Configure diagnostics
     vim.diagnostic.config({

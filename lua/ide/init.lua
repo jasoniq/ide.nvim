@@ -2,9 +2,9 @@ vim.uv = vim.uv or vim.loop
 
 local M = {}
 
--- LazyVim compatibility - provide a default config function
+-- Setup is handled automatically via plugins/init.lua (ide-core spec).
+-- This function is available for manual use outside of LazyVim.
 function M.config()
-  -- Auto-load essential IDE configuration
   require("ide.config.core.options").setup()
   require("ide.config.bindings.keymaps").setup()
 end

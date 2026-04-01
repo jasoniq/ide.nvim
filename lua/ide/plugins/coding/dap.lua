@@ -1,6 +1,10 @@
 return {
   "mfussenegger/nvim-dap",
-  event = { "BufReadPre", "BufNewFile" },
+  cmd = { "DapToggleBreakpoint", "DapContinue" },
+  keys = {
+    { "<leader>db", desc = "Toggle Breakpoint" },
+    { "<leader>dc", desc = "Continue" },
+  },
   dependencies = {
     -- Mason integration for DAP servers
     {

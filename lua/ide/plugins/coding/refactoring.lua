@@ -4,7 +4,12 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  event = { "BufReadPre", "BufNewFile" },
+  keys = {
+    { "<leader>re", desc = "Extract Function" },
+    { "<leader>rv", desc = "Extract Variable" },
+    { "<leader>ri", desc = "Inline Variable" },
+    { "<leader>rr", desc = "Refactor Menu" },
+  },
   opts = {
     prompt_func_return_type = {
       go = false,
