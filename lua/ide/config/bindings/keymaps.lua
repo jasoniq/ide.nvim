@@ -9,6 +9,7 @@ function M.setup()
   map("n", "<C-s>", "<cmd>w<CR>", { desc = "general save file" })
   map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
   map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative Numbers" })
+  map("n", "<leader>nw", "<cmd>set wrap!<CR>", { desc = "Toggle Line Wrap" })
 
   -- Comment (always enabled)
   map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
