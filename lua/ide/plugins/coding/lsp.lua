@@ -51,6 +51,9 @@ return {
           },
         },
       },
+      marksman = {
+        filetypes = { "markdown" },
+      },
       -- Add more default server configs as needed
     }
 
@@ -69,6 +72,7 @@ return {
     -- Apply defaults and server-specific overrides using native Nvim 0.11 LSP APIs.
     vim.lsp.config("*", default_lsp_config)
     vim.lsp.config("lua_ls", default_server_configs.lua_ls or {})
+    vim.lsp.config("marksman", default_server_configs.marksman or {})
 
     local border = "rounded"
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })

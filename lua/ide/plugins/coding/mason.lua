@@ -25,6 +25,7 @@ return {
       automatic_enable = true,
       ensure_installed = {
         "lua_ls", -- Include lua_ls for Neovim config development
+        "marksman", -- Markdown language server
       },
     },
   },

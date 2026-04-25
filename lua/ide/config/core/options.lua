@@ -48,6 +48,7 @@ function M.setup()
 
   opt.fillchars = { eob = " " }
   opt.whichwrap = "<>[]hl"
+  opt.colorcolumn = "120"
 end
 
 return M
