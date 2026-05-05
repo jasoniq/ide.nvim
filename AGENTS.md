@@ -5,7 +5,7 @@ This repository is a Neovim plugin collection written in Lua for LazyVim-style s
 ## Build, Lint, and Test
 - No build pipeline or automated test suite is present.
 - Manual testing is the primary validation method: open Neovim and exercise affected keymaps/plugins.
-- For Treesitter parser updates, run `:TSUpdate` inside Neovim.
+- For Tree-sitter parser updates, run `:TSManager` inside Neovim (Neovim 0.12+ core tree-sitter, managed by tree-sitter-manager.nvim).
 - Formatting conventions are defined in `.stylua.toml` (2-space indentation, max width 120).
 
 ## Project Structure

@@ -122,10 +122,27 @@ function M.setup()
     map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
   end
 
-  -- Treesitter - Code Navigation & Selection
+  -- Treesitter (core treesitter via tree-sitter-manager.nvim)
   if config.features.syntax_highlighting then
-    map("n", "<leader>ts", "<cmd>TSToggle highlight<cr>", { desc = "Toggle Syntax Highlighting" })
-    map("n", "<leader>tp", "<cmd>TSPlaygroundToggle<cr>", { desc = "Treesitter Playground" })
+    map("n", "<leader>tm", "<cmd>TSManager<cr>", { desc = "Tree-sitter Parser Manager" })
+    map("n", "<leader>ts", function()
+      local buf = vim.api.nvim_get_current_buf()
+      local hl = vim.treesitter.highlighter.active[buf]
+      if hl then
+        vim.treesitter.stop(buf)
+        vim.notify("Treesitter highlighting: off", vim.log.levels.INFO)
+      else
+        local ok, err = pcall(vim.treesitter.start, buf)
+        if ok then
+          vim.notify("Treesitter highlighting: on", vim.log.levels.INFO)
+        else
+          vim.notify("Treesitter highlighting failed: " .. tostring(err), vim.log.levels.WARN)
+        end
+      end
+    end, { desc = "Toggle Syntax Highlighting" })
+    map("n", "<leader>ti", function()
+      vim.treesitter.inspect_tree({ command = "botright 60vnew" })
+    end, { desc = "Inspect Treesitter Tree" })
   end
 
   -- Buffer Management (note: <leader>bd is handled by Snacks above)

@@ -10,7 +10,7 @@ This is a Neovim plugin collection called `ide.nvim` that provides IDE functiona
 
 ### Manual Testing
 - Open Neovim and interact with plugin features directly
-- For Treesitter language parser updates: Run `:TSUpdate` inside Neovim
+- For Tree-sitter language parser updates: Run `:TSManager` inside Neovim (uses Neovim 0.12+ core tree-sitter via tree-sitter-manager.nvim)
 - No build scripts, linting, or automated test suites are present
 
 ### Plugin Installation Testing
@@ -60,7 +60,7 @@ Each file in `lua/ide/plugins/` returns a LazyVim plugin specification, organize
 - **statusline.lua**: Lualine status bar with LSP status
 
 **Editor** (`lua/ide/plugins/editor/`):
-- **treesitter.lua**: Syntax highlighting (no parsers by default)
+- **treesitter.lua**: Neovim 0.12+ core tree-sitter + tree-sitter-manager.nvim parser manager + nvim-ts-autotag (no parsers installed by default)
 - **vim-tmux-navigator.lua**: Seamless tmux/vim split navigation
 
 **Coding** (`lua/ide/plugins/coding/`):
@@ -84,7 +84,7 @@ Plugins are conditionally loaded via feature flags in `lua/ide/config/core/defau
 - **Colorscheme**: Catppuccin Mocha (configurable)
 - **Inlay hints**: Enabled via LSP on_attach
 - **Key mappings**: Defined in `config/bindings/keymaps.lua` with descriptive names
-- **Treesitter**: No language parsers installed by default (user must add via `ensure_installed`)
+- **Tree-sitter**: No language parsers installed by default (user must add via `ensure_installed` in the `romus204/tree-sitter-manager.nvim` spec, or install interactively via `:TSManager`)
 - **Terminal**: Not included — workflow relies on tmux + vim-tmux-navigator
 
 ## Code Style Guidelines
@@ -100,7 +100,7 @@ Plugins are conditionally loaded via feature flags in `lua/ide/config/core/defau
 - Each plugin file should return a valid LazyVim specification table
 - Use descriptive configuration functions when setup is complex
 - Follow the existing pattern of lazy loading and event triggers
-- Maintain the minimal-by-default philosophy (especially for Treesitter parsers)
+- Maintain the minimal-by-default philosophy (especially for tree-sitter parsers)
 
 ### Keymap Conventions
 - Define all keymaps in `config/keymaps.lua`
@@ -111,6 +111,6 @@ Plugins are conditionally loaded via feature flags in `lua/ide/config/core/defau
 ## Important Notes
 
 - This plugin collection prioritizes minimal clutter and editor-focused experience
-- Treesitter language parsers are intentionally minimal by default
+- Tree-sitter language parsers are intentionally minimal by default
 - The architecture supports easy extension through the modular plugin system
 - All vim options and keymaps are centralized in the config directory

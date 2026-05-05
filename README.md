@@ -18,8 +18,9 @@ A truly productive IDE should work immediately without complex setup. This confi
 ## ⚡ Quick Start
 
 ### Requirements
-- Neovim 0.11.3+
+- Neovim 0.12+ (built-in tree-sitter runtime is required)
 - [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager
+- `tree-sitter` CLI, `git`, and a C compiler (for installing parsers via [tree-sitter-manager.nvim](https://github.com/romus204/tree-sitter-manager.nvim))
 
 ### CLI Dependencies
 For optimal functionality, install these command-line tools:
@@ -69,14 +70,14 @@ Add to your LazyVim plugins:
 ### 🔍 Navigation & Search (Finder-Centric)
 - **Telescope**: Advanced fuzzy finding for files (including hidden), text, buffers, and more
 - **Ripgrep Integration**: Lightning-fast file and text searching with smart filtering
-- **Smart Scope**: Treesitter-based semantic code navigation
+- **Smart Scope**: Tree-sitter-based semantic code navigation
 - **Which-Key**: Interactive keymap discovery
 - **Project Navigation**: Recent files, git files, and project-aware file discovery
 
 ### 💻 Language Support
 - **LSP**: Full Language Server Protocol with Mason management
 - **Completion**: nvim-cmp with intelligent suggestions and snippets
-- **Treesitter**: Advanced syntax highlighting and code understanding
+- **Tree-sitter**: Native Neovim 0.12+ tree-sitter runtime with parser management via [tree-sitter-manager.nvim](https://github.com/romus204/tree-sitter-manager.nvim)
 - **Mason**: Automatic LSP server, formatter, and linter installation
 
 ### 🔧 Professional Refactoring
@@ -214,9 +215,10 @@ Add to your LazyVim plugins:
 - `<leader>.` - Toggle Scratch Buffer
 - `<leader>S` - Select Scratch Buffer
 
-### Treesitter (`<leader>t`)
-- `<leader>ts` - Toggle Syntax Highlighting
-- `<leader>tp` - Treesitter Playground
+### Tree-sitter (`<leader>t`)
+- `<leader>tm` - Open Tree-sitter Parser Manager (`:TSManager`)
+- `<leader>ts` - Toggle Syntax Highlighting (current buffer)
+- `<leader>ti` - Inspect Tree-sitter Tree
 
 ### Quick Actions
 - `<leader>q` - Quit
@@ -263,11 +265,13 @@ Override any plugin using lazy.nvim's standard pattern:
   },
 },
 
--- Add language parsers
+-- Add tree-sitter parsers (managed by tree-sitter-manager.nvim,
+-- which uses Neovim 0.12+ core tree-sitter under the hood)
 {
-  "nvim-treesitter/nvim-treesitter",
+  "romus204/tree-sitter-manager.nvim",
   opts = {
     ensure_installed = { "lua", "python", "javascript", "typescript" },
+    -- auto_install = true, -- install missing parsers on demand
   },
 },
 ```
@@ -291,7 +295,8 @@ Override any plugin using lazy.nvim's standard pattern:
 - **[mason.nvim](https://github.com/williamboman/mason.nvim)** - LSP/DAP/linter installer
 - **[mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)** - Mason LSP integration
 - **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)** - Completion engine
-- **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)** - Syntax highlighting
+- **[tree-sitter-manager.nvim](https://github.com/romus204/tree-sitter-manager.nvim)** - Parser manager for Neovim 0.12+ core tree-sitter
+- **[nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)** - Auto-close/rename HTML/JSX tags via tree-sitter
 
 ### Refactoring & Code Quality  
 - **[refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)** - Advanced refactoring operations
@@ -327,11 +332,11 @@ Languages are added automatically via Mason. To ensure specific ones are install
   },
 },
 
--- Override Treesitter configuration  
+-- Override tree-sitter parser list
 {
-  "nvim-treesitter/nvim-treesitter",
+  "romus204/tree-sitter-manager.nvim",
   opts = {
-    ensure_installed = { "lua", "python", "javascript", "go" }
+    ensure_installed = { "lua", "python", "javascript", "go" },
   },
 },
 ```

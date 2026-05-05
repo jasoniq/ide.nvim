@@ -20,7 +20,7 @@ return {
       { "<leader>s", group = "Snacks", icon = "🍿" },
       { "<leader>b", group = "Buffer", icon = "📄" },
       { "<leader>w", group = "Window", icon = "🪟" },
-      { "<leader>t", group = "Treesitter", icon = "🌳" },
+      { "<leader>t", group = "Tree-sitter", icon = "🌳" },
       { "<leader>c", group = "Code", icon = "💻" },
       { "<leader>d", group = "Debug", icon = "🐛" },
     })
