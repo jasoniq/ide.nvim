@@ -34,7 +34,7 @@ This repository is a Neovim plugin collection written in Lua for LazyVim-style s
 - Keep core option changes in `lua/ide/config/core/options.lua`.
 - Respect feature flags in `lua/ide/config/core/defaults.lua` when adding conditional plugin behavior.
 - New plugin configuration should follow existing Lazy spec style and domain grouping.
-- Prefer `keys`/`cmd` lazy loading over `event` for user-initiated features (debugging, refactoring).
+- Prefer `cmd` (or `event`) lazy loading for user-initiated features (debugging, refactoring) when keymaps live in `lua/ide/config/bindings/keymaps.lua`. Do **not** add `keys = { ... }` lazy-load triggers in those plugin specs — lazy.nvim's keys-stub mappings will overwrite the central keymaps and leave the lhs unmapped (e.g. `<leader>db` would fall through to `d`+`b`, deleting characters). Plugins are still auto-lazy-loaded the first time `keymaps.lua` calls `require("<plugin>")`.
 - No terminal plugins — tmux + vim-tmux-navigator handles terminal workflow.
 
 ## Additional Notes

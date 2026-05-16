@@ -1,10 +1,11 @@
 return {
   "mfussenegger/nvim-dap",
+  -- Loaded lazily on `require("dap")` from keymaps.lua. We intentionally do
+  -- NOT use `keys = { ... }` here: lazy.nvim's keys-stub mappings would
+  -- overwrite the real <leader>d… mappings registered in keymaps.lua, leaving
+  -- vim to parse e.g. <leader>db as the `d` operator + `b` motion (deleting
+  -- characters under the cursor).
   cmd = { "DapToggleBreakpoint", "DapContinue" },
-  keys = {
-    { "<leader>db", desc = "Toggle Breakpoint" },
-    { "<leader>dc", desc = "Continue" },
-  },
   dependencies = {
     -- Mason integration for DAP servers
     {

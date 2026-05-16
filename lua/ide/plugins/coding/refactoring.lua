@@ -13,12 +13,11 @@ return {
       -- Tree-sitter parsers/queries come from the core 0.12 runtime, managed by
       -- tree-sitter-manager.nvim (see lua/ide/plugins/editor/treesitter.lua).
     },
-    keys = {
-      { "<leader>re", desc = "Extract Function" },
-      { "<leader>rv", desc = "Extract Variable" },
-      { "<leader>ri", desc = "Inline Variable" },
-      { "<leader>rr", desc = "Refactor Menu" },
-    },
+    -- Loaded lazily on `require("refactoring")` from keymaps.lua. We
+    -- intentionally do NOT use `keys = { ... }` here: lazy.nvim's keys-stub
+    -- mappings would overwrite the real <leader>r… mappings registered in
+    -- keymaps.lua, leaving vim to parse e.g. <leader>re as the `d` operator +
+    -- `e` motion (a destructive delete-to-end-of-word).
     opts = {
       prompt_func_return_type = {
         go = false,
